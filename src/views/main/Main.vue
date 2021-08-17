@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2>main</h2>
-    <ElButton type="danger">main</ElButton>
   </div>
 </template>
 

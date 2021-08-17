@@ -41,9 +41,9 @@ class YQRequest {
     })
     this.instance.interceptors.response.use(res => {
       console.log("所有实例拦截:响应拦截成功")
-      setTimeout(() => {
-        this.isLoading?.close()
-      }, 1000)
+
+      this.isLoading?.close()
+
 
       const data = res.data
       if (data.returnCode === "-1001") {
@@ -53,9 +53,9 @@ class YQRequest {
       }
 
     }, error => {
-      setTimeout(() => {
-        this.isLoading?.close()
-      }, 1000)
+
+      this.isLoading?.close()
+
       if (error.response.status === 404) {
         console.log("404:Not Found")
       }

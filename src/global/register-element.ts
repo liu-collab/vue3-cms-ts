@@ -9,7 +9,8 @@ import {
   ElLink,
   ElRadio,
   ElTabPane,
-  ElTabs
+  ElTabs,
+
 } from 'element-plus'
 
 const components = [
