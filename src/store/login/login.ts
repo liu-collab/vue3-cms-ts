@@ -19,6 +19,7 @@ const loginModule: Module<ILoginType, IRootState> = {
   actions: {
     async accountAction({ commit }, paload: IAccount) {
       const result = await accountLoginRequest(paload)
+
       console.log(result)
     }
   }

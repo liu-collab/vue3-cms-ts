@@ -20,8 +20,6 @@ app.use(store)
 
 app.mount('#app');
 
-
-
 // Request.request({
 //   url: "/home/multidata",
 //   method: 'GET',
