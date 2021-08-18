@@ -7,17 +7,17 @@
       :model="account"
       label-width="80px"
     >
-      <el-form-item label="手机号码" prop="name">
+      <el-form-item label="手机号码" prop="phone">
         <el-input
-          type="password"
+          type="text"
           v-model="account.phone"
           autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item label="验证码" prop="password">
+      <el-form-item label="验证码" prop="Vcode">
         <div class="vcode">
           <el-input
-            type="password"
+            type="text"
             v-model="account.Vcode"
             autocomplete="off"
           ></el-input>

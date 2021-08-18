@@ -12,7 +12,6 @@ import router from './router';
 import store from './store';
 import { globalRegister } from './global'
 
-import Request from './service'
 const app = createApp(App)
 //globalRegister(app)
 app.use(globalRegister)
@@ -21,8 +20,7 @@ app.use(store)
 
 app.mount('#app');
 
-console.log(process.env.VUE_APP_BASE_URL)
-console.log(process.env.VUE_APP_BASE_NAME)
+
 
 // Request.request({
 //   url: "/home/multidata",
@@ -40,21 +38,3 @@ console.log(process.env.VUE_APP_BASE_NAME)
 //   showLoading: false
 // })
 
-interface DataType {
-  data: any
-  returnCode: string
-  success: boolean
-}
-
-Request.get<DataType>({
-  url: "/home/multidata",
-
-
-}).then(res => {
-  console.log(res.data)
-  console.log(res.returnCode)
-  console.log(res.success)
-
-}).catch(error => {
-  console.log(error)
-})

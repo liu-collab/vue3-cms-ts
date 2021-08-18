@@ -1,18 +1,29 @@
-const path = require('path');
+//const path = require('path');
 module.export = {
+
   //方法一
-  configureWebpack: (config) => {
-    config.resolve.alias = {
-      '@': path.resolve(__dirname, 'src'),
-      components: '@/components',
+  // configureWebpack: (config) => {
+  //   config.resolve.alias = {
+  //     '@': path.resolve(__dirname, 'src'),
+  //     components: '@/components',
+  //   }
+  // },
+   devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://152.136.185.210:5000',
+        pathRewrite: { '^/api': ''},
+        changeOrigin: true
+      }
     }
   },
   //方法二
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //       coponents: '@/component',
-  //     },
-  //   },
-  // },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        coponents: '@/component',
+      },
+    },
+
+  },
 };

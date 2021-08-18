@@ -27,7 +27,7 @@ class YQRequest {
     //所有实例进行响应拦截
     this.instance.interceptors.request.use((config) => {
 
-      console.log("所有实例拦截:请求拦截成功")
+      //  console.log("所有实例拦截:请求拦截成功")
       if (this.showLoading) {
         this.isLoading = ElLoading.service({
           lock: true,
@@ -40,14 +40,14 @@ class YQRequest {
       return error
     })
     this.instance.interceptors.response.use(res => {
-      console.log("所有实例拦截:响应拦截成功")
+      // console.log("所有实例拦截:响应拦截成功")
 
       this.isLoading?.close()
 
 
       const data = res.data
       if (data.returnCode === "-1001") {
-        console.log("请求失败,错误信息")
+        alert("请求失败,错误信息")
       } else {
         return data
       }
@@ -57,7 +57,7 @@ class YQRequest {
       this.isLoading?.close()
 
       if (error.response.status === 404) {
-        console.log("404:Not Found")
+        alert("404:Not Found")
       }
       return error
     })
@@ -87,7 +87,7 @@ class YQRequest {
           //请求loading组件关闭之后打开
           this.showLoading = true
           reject(error)
-          console.log(error)
+          // console.log(error)
         })
     })
   }
