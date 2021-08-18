@@ -1,10 +1,12 @@
+import LocalCache from '@/utlis/Cache';
 import { createRouter, createWebHashHistory } from 'vue-router';
 //路由类型
 import type { RouteRecordRaw } from 'vue-router';
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/main'
   },
   {
     path: '/login',
@@ -20,5 +22,12 @@ const router = createRouter({
   routes,
   history: createWebHashHistory()
 });
-
+router.beforeEach((to) => {
+  if (to.path !== '/login') {
+    const token = LocalCache.getCache('token')
+    if (!token) {
+      return '/login'
+    }
+  }
+})
 export default router;

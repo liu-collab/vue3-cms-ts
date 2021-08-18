@@ -1,4 +1,5 @@
 export interface ILoginType {
   token: string,
-  userinfo: any
+  userinfo: any,
+  userInfoMenu: any
 }

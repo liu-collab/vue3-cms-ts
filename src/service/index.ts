@@ -1,5 +1,7 @@
+import LocalCache from '@/utlis/Cache';
 import YQRequest from './request'
 import { BASE_URL, TIME_OUT } from './request/config'
+
 const Request = new YQRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
@@ -7,7 +9,8 @@ const Request = new YQRequest({
   interceptors: {
     requestInterceptors: (config) => {
       //携带token拦截
-      const token = ''
+
+      const token = LocalCache.getCache('token')
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
