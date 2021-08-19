@@ -3,3 +3,4 @@ export interface ILoginType {
   userinfo: any,
   userInfoMenu: any
 }
+
