@@ -2,7 +2,7 @@
   <div class="container">
     <el-container class="el-container">
       <el-aside
-        class="aside v-enter-active v-leave-active"
+        class="aside v-enter-active v-leave-active v-leave-to"
         :width="isCollapse ? '60px' : '210px'"
       >
         <nav-menu :collapse="isCollapse" />
@@ -57,6 +57,7 @@ export default defineComponent({
     .v-leave-active {
       transition: all 0.5s;
     }
+
     .el-main {
       padding: 0;
 

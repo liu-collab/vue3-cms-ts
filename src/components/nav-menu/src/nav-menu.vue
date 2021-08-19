@@ -2,11 +2,11 @@
   <div class="nav-menu">
     <div class="logo">
       <img class="img" src="~@/assets/img/logo.svg" alt="logo" />
-      <span v-if="!collapse" class="title">vue3 + ts</span>
+      <span v-if="!collapse" class="title">Echo</span>
     </div>
     <el-menu
       default-active="2"
-      class="el-menu-vertical"
+      class="el-menu-vertical v-enter-to"
       background-color="#d8d9f5"
       :collapse="collapse"
       text-color="#000000"
@@ -80,9 +80,10 @@ export default defineComponent({
     }
   }
 }
-el-menu {
+.el-menu {
   border-right: none;
 }
+
 // 目录
 .el-submenu {
   // 二级菜单 ( 默认背景 )
@@ -92,10 +93,9 @@ el-menu {
   }
 }
 
-::v-deep .el-submenu__title {
+.el-submenu__title {
   background-color: #d8d9f5 !important;
 }
-
 // hover 高亮
 .el-menu-item:hover {
   color: #000000 !important; // 菜单
