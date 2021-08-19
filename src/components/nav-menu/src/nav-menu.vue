@@ -2,14 +2,16 @@
   <div class="nav-menu">
     <div class="logo">
       <img class="img" src="~@/assets/img/logo.svg" alt="logo" />
-      <span class="title">vue3 + ts</span>
+      <span v-if="!collapse" class="title">vue3 + ts</span>
     </div>
     <el-menu
       default-active="2"
       class="el-menu-vertical"
       background-color="#d8d9f5"
+      :collapse="collapse"
       text-color="#000000"
       active-text-color="#000000"
+      :collapse-transition="ad"
     >
       <template v-for="item in userMenu" :key="item.id">
         <template v-if="item.type === 1">
@@ -38,16 +40,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { useStore } from '@/store';
 export default defineComponent({
+  props: {
+    collapse: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {},
   setup() {
+    const ad = ref(true);
     const store = useStore();
     const userMenu = computed(() => store.state.loginModule.userInfoMenu);
 
     return {
-      userMenu
+      userMenu,
+      ad
     };
   }
 });
@@ -60,9 +70,7 @@ export default defineComponent({
     display: flex;
     height: 28px;
     padding: 12px 10px 8px 12px;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: center;
+
     .img {
       height: 100%;
       margin: 0 10px;
@@ -71,6 +79,9 @@ export default defineComponent({
       font-size: 16px;
     }
   }
+}
+el-menu {
+  border-right: none;
 }
 // 目录
 .el-submenu {
@@ -93,10 +104,5 @@ export default defineComponent({
 .el-menu-item.is-active {
   color: #fff !important;
   background-color: #b5b5b5 !important;
-}
-
-.el-menu-vertical:not(.el-menu--collapse) {
-  width: 100%;
-  height: calc(100% - 48px);
 }
 </style>

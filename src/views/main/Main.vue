@@ -1,12 +1,17 @@
 <template>
   <div class="container">
     <el-container class="el-container">
-      <el-aside class="aside" width="210px">
-        <nav-menu></nav-menu>
+      <el-aside
+        class="aside v-enter-active v-leave-active"
+        :width="isCollapse ? '60px' : '210px'"
+      >
+        <nav-menu :collapse="isCollapse" />
       </el-aside>
 
       <el-container class="el-main">
-        <el-header class="header">Header</el-header>
+        <el-header class="header">
+          <nav-header @folderChangeBtn="handleFoldChange" />
+        </el-header>
         <el-main class="main">Main</el-main>
       </el-container>
     </el-container>
@@ -14,14 +19,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import NavMenu from '@/components/nav-menu';
+import NavHeader from '@/components/nav-header';
 export default defineComponent({
   components: {
-    NavMenu
+    NavMenu,
+    NavHeader
   },
   setup() {
-    return {};
+    const isCollapse = ref(false);
+    const handleFoldChange = (isFold: boolean) => {
+      isCollapse.value = isFold;
+    };
+    return {
+      handleFoldChange,
+      isCollapse
+    };
   }
 });
 </script>
@@ -39,6 +53,10 @@ export default defineComponent({
       height: 1000px;
       overflow: hidden;
     }
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.5s;
+    }
     .el-main {
       padding: 0;
 
@@ -46,7 +64,7 @@ export default defineComponent({
       .header {
         display: flex;
         align-content: center;
-        justify-content: center;
+
         background-color: #b5b5b5;
         height: 48px;
       }

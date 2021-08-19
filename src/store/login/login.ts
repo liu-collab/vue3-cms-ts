@@ -44,6 +44,7 @@ const loginModule: Module<ILoginType, IRootState> = {
       //3.请求用户菜单
       const userInfoMenuRequest = await userMenuRequest(userInfo.role.id)
       const userInfoMenu = userInfoMenuRequest.data
+
       commit('changeUserMenu', userInfoMenu)
       LocalCache.setCache('userInfoMenu', userInfoMenu)
       //4.跳转到首页
