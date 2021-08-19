@@ -5,7 +5,7 @@
       <span v-if="!collapse" class="title">Echo</span>
     </div>
     <el-menu
-      default-active="2"
+      default-active="3"
       class="el-menu-vertical v-enter-to"
       background-color="#d8d9f5"
       :collapse="collapse"
