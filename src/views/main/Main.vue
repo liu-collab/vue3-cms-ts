@@ -83,7 +83,7 @@ export default defineComponent({
       .main {
         height: calc(100%-48px);
         background-color: #ebeaef;
-        width: 1500px;
+        width: 1350px;
         overflow: hidden;
         .main-content {
           background-color: #ebeaef;
