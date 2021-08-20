@@ -73,7 +73,7 @@ export default defineComponent({
       padding: 0;
 
       overflow: hidden;
-      .headers {
+      .heades {
         display: flex;
         align-content: center;
 
@@ -83,8 +83,9 @@ export default defineComponent({
       .main {
         height: calc(100%-48px);
         background-color: #ebeaef;
-        width: 1350px;
+        width: 1380px;
         overflow: hidden;
+        padding: 20px 80px 20px 20px;
         .main-content {
           background-color: #ebeaef;
         }

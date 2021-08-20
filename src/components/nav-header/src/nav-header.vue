@@ -18,7 +18,7 @@
             src="https://avatars.githubusercontent.com/u/63389142?s=400&u=387e9b277169da1415e0795f28a83f649f4dc5d6&v=4"
           ></el-avatar>
         </div>
-        <user-info></user-info>
+        <user-info class="user-info"></user-info>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default defineComponent({
   .folder-menu {
     .foldbtn {
       font-size: 30px;
-      margin: 15px 0;
+      margin: 10px 0;
       cursor: pointer;
     }
   }
@@ -63,11 +63,17 @@ export default defineComponent({
     align-content: center;
     justify-content: space-between;
     line-height: 56px;
-    padding: 0 30px 0 20px;
+    padding: 0 60px 0 20px;
+    .left {
+      margin-top: -5px;
+    }
     .right {
       display: flex;
       .block {
-        padding: 10px 20px;
+        padding: 5px 20px;
+      }
+      .user-info {
+        margin-top: -5px;
       }
     }
   }
