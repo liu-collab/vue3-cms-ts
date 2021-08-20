@@ -12,6 +12,7 @@
       text-color="#000000"
       active-text-color="#000000"
       :collapse-transition="ad"
+      router
     >
       <template v-for="item in userMenu" :key="item.id">
         <template v-if="item.type === 1">
@@ -21,7 +22,10 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleRoutrclick(subitem)"
+              >
                 <i v-if="subitem.icon" :class="item.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
@@ -42,6 +46,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
 import { useStore } from '@/store';
+import { useRouter } from 'vue-router';
 export default defineComponent({
   props: {
     collapse: {
@@ -54,10 +59,16 @@ export default defineComponent({
     const ad = ref(true);
     const store = useStore();
     const userMenu = computed(() => store.state.loginModule.userInfoMenu);
-
+    const router = useRouter();
+    const handleRoutrclick = (item: any) => {
+      router.push({
+        path: item.url ?? '/404'
+      });
+    };
     return {
       userMenu,
-      ad
+      ad,
+      handleRoutrclick
     };
   }
 });

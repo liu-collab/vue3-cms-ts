@@ -1,19 +1,23 @@
 <template>
   <div class="container">
-    <el-container class="el-container">
+    <el-container class="el-containers">
       <el-aside
-        class="aside v-enter-active v-leave-active v-leave-to"
+        class="asides v-enter-active v-leave-active v-leave-to"
         :width="isCollapse ? '60px' : '210px'"
         :class="isCollapse ? 'bgc' : 'bg'"
       >
         <nav-menu :collapse="isCollapse" />
       </el-aside>
 
-      <el-container class="el-main">
-        <el-header class="header">
+      <el-container class="el-maincontent">
+        <el-header class="heades">
           <nav-header @folderChangeBtn="handleFoldChange" />
         </el-header>
-        <el-main class="main">Main</el-main>
+        <el-main class="main">
+          <div class="main-content">
+            <router-view></router-view>
+          </div>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -48,8 +52,8 @@ export default defineComponent({
   left: 0;
 
   overflow: hidden;
-  .el-container {
-    .aside {
+  .el-containers {
+    .asides {
       background-color: #a6a7c0;
       height: 1000px;
       overflow: hidden;
@@ -65,11 +69,11 @@ export default defineComponent({
       transition: all 0.5s;
     }
 
-    .el-main {
+    .el-maincontent {
       padding: 0;
 
       overflow: hidden;
-      .header {
+      .headers {
         display: flex;
         align-content: center;
 
@@ -77,12 +81,13 @@ export default defineComponent({
         height: 48px;
       }
       .main {
-        display: flex;
-        align-content: center;
-        justify-content: center;
+        height: calc(100%-48px);
         background-color: #ebeaef;
         width: 1500px;
         overflow: hidden;
+        .main-content {
+          background-color: #ebeaef;
+        }
       }
     }
   }
