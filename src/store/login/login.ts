@@ -4,6 +4,7 @@ import { Module } from 'vuex'
 import { accountLoginRequest, userinfoRequest, userMenuRequest } from '@/service/login/login'
 import LocalCache from '@/utlis/Cache'
 import router from '@/router'
+import { mapMenuInfo, } from '@/utlis/map-menuinfo'
 
 import { IAccount } from '@/service/login/type'
 import { ILoginType } from './type'
@@ -27,6 +28,13 @@ const loginModule: Module<ILoginType, IRootState> = {
     },
     changeUserMenu(state, userInfoMenu: any) {
       state.userInfoMenu = userInfoMenu
+
+      //处理路由映射表
+      const routes = mapMenuInfo(userInfoMenu)
+      //添加路由
+      routes.forEach(route => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {

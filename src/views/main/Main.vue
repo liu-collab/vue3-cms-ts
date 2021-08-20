@@ -4,6 +4,7 @@
       <el-aside
         class="aside v-enter-active v-leave-active v-leave-to"
         :width="isCollapse ? '60px' : '210px'"
+        :class="isCollapse ? 'bgc' : 'bg'"
       >
         <nav-menu :collapse="isCollapse" />
       </el-aside>
@@ -52,6 +53,12 @@ export default defineComponent({
       background-color: #a6a7c0;
       height: 1000px;
       overflow: hidden;
+    }
+    .bgc {
+      background-color: #d8d9f5;
+    }
+    .bg {
+      background-color: #a6a7c0;
     }
     .v-enter-active,
     .v-leave-active {
