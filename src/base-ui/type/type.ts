@@ -12,3 +12,16 @@ export interface IFormType {
   options?: OptionType[],
   otherOptions?: any
 }
+interface ILayoutType {
+  xs?: number,
+  xm?: number,
+  md?: number,
+  lg?: number,
+  xl?: number
+}
+export interface IForm {
+  formItem: IFormType[],
+  collLayout?: ILayoutType,
+  labelWidth?: string,
+  itemStyle?: any
+}

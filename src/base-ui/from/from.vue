@@ -3,7 +3,7 @@
     <el-from :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
-          <el-col :span="8">
+          <el-col v-bind="collLayout">
             <el-form-item :label="item.label" :style="itemStyle">
               <temmplat
                 v-if="item.type === 'input' || item.type === 'password'"
@@ -52,6 +52,16 @@ export default defineComponent({
     itemStyle: {
       type: Object,
       default: () => ({ padding: '10px 40px' })
+    },
+    collLayout: {
+      type: Object,
+      default: () => ({
+        xs: 24,
+        xm: 24,
+        md: 12,
+        lg: 8,
+        xl: 8
+      })
     }
   },
   components: {},

@@ -50,12 +50,15 @@ export default defineComponent({
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 
   overflow: hidden;
   .el-containers {
+    height: 100%;
     .asides {
       background-color: #a6a7c0;
-      height: 1000px;
+
       overflow: hidden;
     }
     .bgc {
@@ -71,7 +74,7 @@ export default defineComponent({
 
     .el-maincontent {
       padding: 0;
-
+      height: 100%;
       overflow: hidden;
       .heades {
         display: flex;
@@ -83,9 +86,10 @@ export default defineComponent({
       .main {
         height: calc(100%-48px);
         background-color: #ebeaef;
-        width: 1380px;
+
         overflow: hidden;
-        padding: 20px 80px 20px 20px;
+        padding: 20px 20px 20px 20px;
+
         .main-content {
           background-color: #ebeaef;
         }
