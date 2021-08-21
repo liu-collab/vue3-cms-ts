@@ -1,18 +1,18 @@
 <template>
   <div class="yq-form">
-    <el-from :label-width="labelWidth">
+    <el-form :label-width="labelWidth">
       <el-row>
-        <template v-for="item in formItems" :key="item.label">
+        <template v-for="item in formItem" :key="item.label">
           <el-col v-bind="collLayout">
             <el-form-item :label="item.label" :style="itemStyle">
-              <temmplat
+              <template
                 v-if="item.type === 'input' || item.type === 'password'"
               >
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
                 ></el-input>
-              </temmplat>
+              </template>
               <template v-else-if="item.type === 'select'">
                 <el-select :placeholder="item.placeholder">
                   <el-option
@@ -32,7 +32,7 @@
           </el-col>
         </template>
       </el-row>
-    </el-from>
+    </el-form>
   </div>
 </template>
 
@@ -41,13 +41,13 @@ import { defineComponent, PropType } from 'vue';
 import { IFormType } from '../type/type';
 export default defineComponent({
   props: {
-    formItems: {
+    formItem: {
       type: Array as PropType<IFormType[]>,
       default: () => []
     },
     labelWidth: {
       type: String,
-      default: '100px'
+      default: '120px'
     },
     itemStyle: {
       type: Object,

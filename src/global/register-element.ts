@@ -27,6 +27,7 @@ import {
   ElSelect,
   ElDatePicker,
   ElOption,
+  ElBreadcrumbItem,
 } from 'element-plus'
 
 const components = [
@@ -55,7 +56,8 @@ const components = [
   ElCol,
   ElSelect,
   ElDatePicker,
-  ElOption
+  ElOption,
+  ElBreadcrumbItem
 
 ]
 

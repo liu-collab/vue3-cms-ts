@@ -39,6 +39,6 @@ export const searchFormConfig: IForm = {
   ],
   labelWidth: '80px',
   itemStyle: {
-    padding: '10px 40px'
+    padding: '10px 30px'
   }
 };

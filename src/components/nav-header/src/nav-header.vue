@@ -9,7 +9,7 @@
     </div>
     <div class="heder-info">
       <div class="left">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/main' }">首页</el-breadcrumb-item>
       </div>
       <div class="right">
         <div class="block">
