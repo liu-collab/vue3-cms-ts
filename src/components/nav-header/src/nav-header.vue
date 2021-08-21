@@ -17,7 +17,6 @@
       <div class="right">
         <div class="block">
           <el-avatar
-            size="number"
             src="https://avatars.githubusercontent.com/u/63389142?s=400&u=387e9b277169da1415e0795f28a83f649f4dc5d6&v=4"
           ></el-avatar>
         </div>

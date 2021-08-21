@@ -74,7 +74,7 @@ export default defineComponent({
 
     .el-maincontent {
       padding: 0;
-      height: 100%;
+
       overflow: hidden;
       .heades {
         display: flex;
@@ -87,7 +87,6 @@ export default defineComponent({
         height: calc(100%-48px);
         background-color: #ebeaef;
 
-        overflow: hidden;
         padding: 20px 20px 20px 20px;
 
         .main-content {

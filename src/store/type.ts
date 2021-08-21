@@ -1,3 +1,4 @@
+import { ISystemType } from './main/system/type';
 import { ILoginType } from "./login/type";
 export interface IRootState {
   name: string,
@@ -5,7 +6,8 @@ export interface IRootState {
 }
 
 export interface IRootWithModule {
-  loginModule: ILoginType
+  loginModule: ILoginType,
+  systemModule: ISystemType
 }
 
 export type IRootType = IRootState & IRootWithModule

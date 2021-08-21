@@ -46,3 +46,5 @@ export const searchFormConfig: IForm = {
     padding: '10px 30px'
   }
 };
+
+
