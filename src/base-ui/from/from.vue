@@ -1,5 +1,6 @@
 <template>
   <div class="yq-form">
+    <slot name="header"></slot>
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItem" :key="item.label">
@@ -11,10 +12,14 @@
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
+                  v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>
               <template v-else-if="item.type === 'select'">
-                <el-select :placeholder="item.placeholder">
+                <el-select
+                  :placeholder="item.placeholder"
+                  v-model="formData[`${item.field}`]"
+                >
                   <el-option
                     v-for="option in item.options"
                     :value="option.value"
@@ -25,7 +30,11 @@
                 </el-select>
               </template>
               <template v-else-if="item.type === 'datepicker'">
-                <el-date-picker v-bind="item.otherOptions" style="width: 100%">
+                <el-date-picker
+                  v-model="formData[`${item.field}`]"
+                  v-bind="item.otherOptions"
+                  style="width: 100%"
+                >
                 </el-date-picker>
               </template>
             </el-form-item>
@@ -33,14 +42,19 @@
         </template>
       </el-row>
     </el-form>
+    <slot name="footer"></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, watch, ref } from 'vue';
 import { IFormType } from '../type/type';
 export default defineComponent({
   props: {
+    modelValue: {
+      type: Object,
+      require: true
+    },
     formItem: {
       type: Array as PropType<IFormType[]>,
       default: () => []
@@ -65,8 +79,21 @@ export default defineComponent({
     }
   },
   components: {},
-  setup() {
-    return {};
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    //将数据进行拷贝,再取出相应的值
+    const formData = ref({ ...props.modelValue });
+    //深度监听数据的改变,当输入框的数据发生改变,发射事件
+    watch(
+      formData,
+      (newValue) => {
+        emit('update:modelValue', newValue);
+      },
+      { deep: true }
+    );
+    return {
+      formData
+    };
   }
 });
 </script>

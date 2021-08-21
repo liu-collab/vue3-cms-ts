@@ -1,17 +1,18 @@
 <template>
   <div class="user">
-    <YQFrom v-bind="searchFormConfig"></YQFrom>
+    <search-form-page :searchConfig="searchFormConfig"></search-form-page>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import YQFrom from '@/base-ui';
 import { searchFormConfig } from './config/searchform.config';
+import searchFormPage from '@/components/search-form';
 export default defineComponent({
   name: 'user',
+
   components: {
-    YQFrom
+    searchFormPage
   },
   setup() {
     return {

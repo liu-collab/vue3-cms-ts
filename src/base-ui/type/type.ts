@@ -6,6 +6,7 @@ interface OptionType {
 export interface IFormType {
   type: IFormInType
   label: string
+  field: string
   title?: string
   placeholder?: string
   rules?: any[],
