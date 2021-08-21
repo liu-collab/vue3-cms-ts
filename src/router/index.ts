@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 //路由类型
 import type { RouteRecordRaw } from 'vue-router';
 
+import { fistMenu } from '@/utlis/map-menuinfo';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -34,6 +35,9 @@ router.beforeEach((to) => {
     if (!token) {
       return '/login'
     }
+  }
+  if (to.path == '/main') {
+    return fistMenu.url
   }
 })
 export default router;

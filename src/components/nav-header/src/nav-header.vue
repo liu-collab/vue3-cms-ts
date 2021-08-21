@@ -9,7 +9,10 @@
     </div>
     <div class="heder-info">
       <div class="left">
-        <el-breadcrumb-item :to="{ path: '/main' }">首页</el-breadcrumb-item>
+        <bread-crumb
+          class="bread-crumb"
+          :BreadCrumb="BreadcrumbInfo"
+        ></bread-crumb>
       </div>
       <div class="right">
         <div class="block">
@@ -25,11 +28,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import userInfo from './user-info.vue';
+import BreadCrumb from '@/base-ui/Breadcrumb/src/BreadCrumb.vue';
+
+import { pathBreadCrumb } from '@/utlis/map-menuinfo';
+import { useStore } from '@/store';
+import { useRoute } from 'vue-router';
 export default defineComponent({
   components: {
-    userInfo
+    userInfo,
+    BreadCrumb
   },
   emits: ['folderChangeBtn'],
   setup(props, { emit }) {
@@ -38,9 +47,20 @@ export default defineComponent({
       isFold.value = !isFold.value;
       emit('folderChangeBtn', isFold.value);
     };
+
+    //面包屑数据
+    const store = useStore();
+
+    const BreadcrumbInfo = computed(() => {
+      const userInfoMenu = store.state.loginModule.userInfoMenu;
+      const route = useRoute();
+      const crrentPath = route.path;
+      return pathBreadCrumb(userInfoMenu, crrentPath);
+    });
     return {
       folderChangeBtn,
-      isFold
+      isFold,
+      BreadcrumbInfo
     };
   }
 });
@@ -65,7 +85,9 @@ export default defineComponent({
     line-height: 56px;
     padding: 0 60px 0 20px;
     .left {
-      margin-top: -5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .right {
       display: flex;

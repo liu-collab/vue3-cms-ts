@@ -1,5 +1,8 @@
+import { IBread } from '@/base-ui/Breadcrumb/type/type'
 import { RouteRecordRaw } from 'vue-router'
 
+//保存第一次进来时的菜单,用于重定向路由
+let fistMenu: any = null
 export function mapMenuInfo(userInfoMenu: any[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
 
@@ -19,6 +22,9 @@ export function mapMenuInfo(userInfoMenu: any[]): RouteRecordRaw[] {
       if (menu.type === 2) {
         const route = allRoutes.find(route => route.path === menu.url)
         if (route) routes.push(route)
+        if (!fistMenu) {
+          fistMenu = menu
+        }
       } else {
         _recurseGetRoute(menu.children)
       }
@@ -28,3 +34,29 @@ export function mapMenuInfo(userInfoMenu: any[]): RouteRecordRaw[] {
 
   return routes
 }
+
+//面包屑路径和名字查找
+export function pathBreadCrumb(userInfoMenu: any[], currentPath: string) {
+  const breadCrumbs: IBread[] = []
+  pathMapToMenu(userInfoMenu, currentPath, breadCrumbs)
+  return breadCrumbs
+}
+
+
+//根据路径查找当前点击的aside  ,对面包屑功能进行扩展
+export function pathMapToMenu(userInfoMenu: any[], currentPath: string, breadCrumbs?: IBread[]): any {
+  for (const menu of userInfoMenu) {
+    if (menu.type === 1) {
+      const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
+      if (findMenu) {
+        breadCrumbs?.push({ name: menu.name })
+        breadCrumbs?.push({ name: findMenu.name })
+        return findMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+  }
+}
+
+export { fistMenu }

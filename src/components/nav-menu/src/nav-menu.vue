@@ -5,14 +5,12 @@
       <span v-if="!collapse" class="title">Echo</span>
     </div>
     <el-menu
-      default-active="3"
+      :default-active="defaultValue"
       class="el-menu-vertical v-enter-to"
       background-color="#d8d9f5"
       :collapse="collapse"
       text-color="#000000"
       active-text-color="#000000"
-      :collapse-transition="ad"
-      router
     >
       <template v-for="item in userMenu" :key="item.id">
         <template v-if="item.type === 1">
@@ -46,7 +44,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
 import { useStore } from '@/store';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { pathMapToMenu } from '@/utlis/map-menuinfo';
 export default defineComponent({
   props: {
     collapse: {
@@ -56,10 +55,16 @@ export default defineComponent({
   },
   components: {},
   setup() {
-    const ad = ref(true);
     const store = useStore();
     const userMenu = computed(() => store.state.loginModule.userInfoMenu);
     const router = useRouter();
+    //获取当前路径
+    const route = useRoute();
+    const currentPath = route.path;
+    //根据路径进行查找id
+    const menu = pathMapToMenu(userMenu.value, currentPath);
+
+    const defaultValue = ref(menu.id + '');
     const handleRoutrclick = (item: any) => {
       router.push({
         path: item.url ?? '/404'
@@ -67,7 +72,7 @@ export default defineComponent({
     };
     return {
       userMenu,
-      ad,
+      defaultValue,
       handleRoutrclick
     };
   }
