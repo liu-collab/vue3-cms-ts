@@ -1,9 +1,14 @@
 export interface ISystemType {
   userList: any
-  userCount: number
+  userCount: number,
+  roleList: any
+  roleCount: number
 }
 
 export interface IPayloadType {
-  url: string,
+
+
+  pageName: string
+  pageUrl: string
   queryInfo: any
 }

@@ -1,7 +1,10 @@
 <template>
   <div class="user">
     <search-form-page :searchConfig="searchFormConfig"></search-form-page>
-    <page-content :pageContentConfig="pageContentConfig"></page-content>
+    <page-content
+      :pageContentConfig="pageContentConfig"
+      pageName="user"
+    ></page-content>
   </div>
 </template>
 

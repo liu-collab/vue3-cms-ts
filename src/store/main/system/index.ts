@@ -9,27 +9,59 @@ const systemModule: Module<ISystemType, IRootState> = {
   state() {
     return {
       userList: [],
-      userCount: 0
+      userCount: 0,
+      roleList: [],
+      roleCount: 0
     }
   },
   mutations: {
-    changeUserList(state, userList: any[]) {
-      state.userList = userList
+    changeuserList(state, list: any[]) {
+      state.userList = list
     },
-    changeUserCount(state, userCount: number) {
-      state.userCount = userCount
+    changeuserCount(state, count: number) {
+      state.userCount = count
+    },
+    changeroleList(state, list: any[]) {
+      state.roleList = list
+    },
+    changeroleCount(state, count: number) {
+      state.roleCount = count
+    }
+  },
+  getters: {
+    pageListData(state) {
+      return (pageName: string) => {
+        switch (pageName) {
+          case 'user':
+            return state.userList
+          case 'role':
+            return state.roleList
+        }
+      }
     }
   },
   actions: {
     async getPageListAction({ commit }, payload: IPayloadType) {
+      const pageName = payload.pageName
+      let pageUrl = ''
+      //通过接收到的pageName,调用对应的接口
+      switch (pageName) {
+        case 'user':
+          pageUrl = '/users/list'
+          break
+        case 'role':
+          pageUrl = '/role/list'
+          break
+      }
       // console.log(payload.url)
       // console.log(payload.queryInfo)
       //获取网页数据
-      const pageListResult = await getPageListData(payload.url, payload.queryInfo)
+      const pageListResult = await getPageListData(pageUrl, payload.queryInfo)
       //console.log(pageListResult)
       const { list, totalCount } = pageListResult.data
-      commit('changeUserList', list)
-      commit('changeUserCount', totalCount)
+      //用字符串拼接来处理提交不同的mutations
+      commit(`change${pageName}List`, list)
+      commit(`change${pageName}Count`, totalCount)
     }
   }
 }

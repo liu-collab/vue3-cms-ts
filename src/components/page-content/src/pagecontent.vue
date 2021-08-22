@@ -1,7 +1,7 @@
 <template>
   <div class="user">
     <div class="user-info">
-      <YQTable v-bind="pageContentConfig" :userList="userList">
+      <YQTable v-bind="pageContentConfig" :userList="dataList">
         <template #handler>
           <div class="header-handle">
             <el-button type="primary" size="mini">新建用户</el-button>
@@ -55,23 +55,31 @@ export default defineComponent({
     pageContentConfig: {
       type: Object,
       required: true
+    },
+    pageName: {
+      type: String,
+      required: true
     }
   },
   components: {
     YQTable
   },
-  setup() {
+  setup(props) {
     const store = useStore();
+    //通过发送相应的pageName去处理不同的网络请求模块
     store.dispatch('systemModule/getPageListAction', {
-      url: '/users/list',
+      pageName: props.pageName,
       queryInfo: {
         offset: 0,
         size: 10
       }
     });
-    const userList = computed(() => store.state.systemModule.userList);
+    //通过模块内的getters处理发送的相应模块数据
+    const dataList = computed(() =>
+      store.getters['systemModule/pageListData'](props.pageName)
+    );
     return {
-      userList
+      dataList
     };
   }
 });
