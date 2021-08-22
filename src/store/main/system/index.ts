@@ -8,18 +8,18 @@ const systemModule: Module<ISystemType, IRootState> = {
 
   state() {
     return {
-      userList: [],
-      userCount: 0,
+      usersList: [],
+      usersCount: 0,
       roleList: [],
       roleCount: 0
     }
   },
   mutations: {
-    changeuserList(state, list: any[]) {
-      state.userList = list
+    changeusersList(state, list: any[]) {
+      state.usersList = list
     },
-    changeuserCount(state, count: number) {
-      state.userCount = count
+    changeusersCount(state, count: number) {
+      state.usersCount = count
     },
     changeroleList(state, list: any[]) {
       state.roleList = list
@@ -31,28 +31,29 @@ const systemModule: Module<ISystemType, IRootState> = {
   getters: {
     pageListData(state) {
       return (pageName: string) => {
-        switch (pageName) {
-          case 'user':
-            return state.userList
-          case 'role':
-            return state.roleList
-        }
+        return (state as any)[`${pageName}List`]
+        // switch (pageName) {
+        //   case 'users':
+        //     return state.usersList
+        //   case 'role':
+        //     return state.roleList
+        // }
       }
     }
   },
   actions: {
     async getPageListAction({ commit }, payload: IPayloadType) {
       const pageName = payload.pageName
-      let pageUrl = ''
+      const pageUrl = `/${pageName}/list`
       //通过接收到的pageName,调用对应的接口
-      switch (pageName) {
-        case 'user':
-          pageUrl = '/users/list'
-          break
-        case 'role':
-          pageUrl = '/role/list'
-          break
-      }
+      // switch (pageName) {
+      //   case 'user':
+      //     pageUrl = '/users/list'
+      //     break
+      //   case 'role':
+      //     pageUrl = '/role/list'
+      //     break
+      // }
       // console.log(payload.url)
       // console.log(payload.queryInfo)
       //获取网页数据

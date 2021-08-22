@@ -3,7 +3,7 @@
     <search-form-page :searchConfig="searchFormConfig"></search-form-page>
     <page-content
       :pageContentConfig="pageContentConfig"
-      pageName="user"
+      pageName="users"
     ></page-content>
   </div>
 </template>
