@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="header">
+      <slot class="title" name="title">{{ title }}</slot>
+      <slot name="handler"></slot>
+    </div>
     <el-table
       :data="userList"
       border
@@ -29,6 +33,20 @@
         </el-table-column>
       </template>
     </el-table>
+    <div class="footer">
+      <slot name="footer-page">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage4"
+          :page-sizes="[100, 200, 300, 400]"
+          :page-size="100"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="400"
+        >
+        </el-pagination>
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -52,6 +70,10 @@ export default defineComponent({
     showSelectcolumn: {
       type: Boolean,
       default: false
+    },
+    title: {
+      type: String,
+      default: '用户列表'
     }
   },
   components: {},
@@ -67,4 +89,17 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.header {
+  display: flex;
+  padding: 20px 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 20px 0;
+}
+</style>
