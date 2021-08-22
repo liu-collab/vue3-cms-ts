@@ -1,6 +1,24 @@
 <template>
   <div>
-    <el-table :data="userList" border style="width: 100%">
+    <el-table
+      :data="userList"
+      border
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column
+        v-if="showSelectcolumn"
+        type="selection"
+        align="center"
+        width="80px"
+      ></el-table-column>
+      <el-table-column
+        v-if="showIndecCloum"
+        type="index"
+        label="序号"
+        align="center"
+        width="80px"
+      ></el-table-column>
       <template v-for="item in tableData" :key="item.id">
         <el-table-column v-bind="item" align="center">
           <template #default="scope">
@@ -26,11 +44,25 @@ export default defineComponent({
     tableData: {
       type: Array,
       required: true
+    },
+    showIndecCloum: {
+      type: Boolean,
+      default: false
+    },
+    showSelectcolumn: {
+      type: Boolean,
+      default: false
     }
   },
   components: {},
-  setup() {
-    return {};
+  emits: ['changeSelect'],
+  setup(props, { emit }) {
+    const handleSelectionChange = (value: any) => {
+      emit('changeSelect', value);
+    };
+    return {
+      handleSelectionChange
+    };
   }
 });
 </script>

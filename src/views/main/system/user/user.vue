@@ -2,11 +2,35 @@
   <div class="user">
     <search-form-page :searchConfig="searchFormConfig"></search-form-page>
     <div class="user-info">
-      <YQTable :tableData="tableData" :userList="userList">
+      <YQTable
+        :tableData="tableData"
+        :userList="userList"
+        :showIndecCloum="showIndecCloum"
+        :showSelectcolumn="showSelectcolumn"
+      >
         <template #enable="scope">
-          <el-button type="primary">{{
-            scope.row.enable ? '启用' : '禁止'
-          }}</el-button>
+          <el-button
+            size="mini"
+            :type="scope.row.enable ? 'success' : 'danger'"
+          >
+            {{ scope.row.enable ? '启用' : '禁止' }}
+          </el-button>
+        </template>
+        <template #createAt="scope">
+          <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
+        </template>
+        <template #updateAt="scope">
+          <span>{{ $filters.formatTime(scope.row.updateAt) }}</span>
+        </template>
+        <template #handle>
+          <div class="handel-btns">
+            <el-button type="text" size="mini" icon="el-icon-edit">
+              编辑</el-button
+            >
+            <el-button type="text" size="mini" icon="el-icon-delete">
+              删除</el-button
+            >
+          </div>
         </template>
       </YQTable>
     </div>
@@ -62,12 +86,17 @@ export default defineComponent({
         label: '更新时间',
         minWidth: '200',
         slotName: 'updateAt'
-      }
+      },
+      { label: '操作', minWidth: '120', slotName: 'handle' }
     ];
+    const showIndecCloum = true;
+    const showSelectcolumn = true;
     return {
       searchFormConfig,
       tableData,
-      userList
+      userList,
+      showIndecCloum,
+      showSelectcolumn
     };
   }
 });
