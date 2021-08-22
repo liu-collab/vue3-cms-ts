@@ -69,7 +69,7 @@ export default defineComponent({
     }
     .v-enter-active,
     .v-leave-active {
-      transition: all 0.5s;
+      transition: all 0.3s;
     }
 
     .el-maincontent {

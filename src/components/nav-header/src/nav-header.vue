@@ -40,7 +40,9 @@ export default defineComponent({
     BreadCrumb
   },
   emits: ['folderChangeBtn'],
+
   setup(props, { emit }) {
+    //aside折叠相关
     const isFold = ref(false);
     const folderChangeBtn = () => {
       isFold.value = !isFold.value;

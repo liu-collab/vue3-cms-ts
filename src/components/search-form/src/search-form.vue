@@ -8,8 +8,12 @@
       </template>
       <template #footer>
         <div class="btn">
-          <el-button type="success" icon="el-icon-search"> 搜索</el-button>
-          <el-button type="primary" icon="el-icon-refresh">重置</el-button>
+          <el-button size="mini" type="success" icon="el-icon-search">
+            搜索</el-button
+          >
+          <el-button size="mini" type="primary" icon="el-icon-refresh"
+            >重置</el-button
+          >
         </div>
       </template>
     </YQFrom>
@@ -44,6 +48,7 @@ export default defineComponent({
 <style scoped lang="less">
 .search {
   padding: 0 0 20px 30px;
+  background-color: #fff;
 }
 .btn {
   text-align: right;
