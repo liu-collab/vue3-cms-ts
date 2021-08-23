@@ -1,4 +1,5 @@
 export const pageContentConfig = {
+  title: '角色列表',
   tableData: [
     { prop: 'name', label: '姓名', minWidth: '120', slotName: 'name' },
     { prop: 'intro', label: '部门', minWidth: '120', slotName: 'intro' },

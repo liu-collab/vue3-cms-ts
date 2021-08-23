@@ -22,7 +22,7 @@
             size="mini"
             :type="scope.row.enable ? 'success' : 'danger'"
           >
-            {{ scope.row.enable ? '启用' : '禁止' }}
+            {{ scope.row.enable ? '启用' : '禁用' }}
           </el-button>
         </template>
         <template #createAt="scope">
@@ -46,6 +46,16 @@
             >
           </div>
         </template>
+        <!-- 动态插槽, 遍历配置的slotName ,将SlotName 绑定到插槽上,传递给使用的.vue文件 -->
+        <template
+          v-for="item in otherTableSlot"
+          :key="item.prop"
+          #[item.slotName]="scope"
+        >
+          <template v-if="item.slotName">
+            <slot :name="item.slotName" :row="scope.row"></slot>
+          </template>
+        </template>
       </YQTable>
     </div>
   </div>
@@ -64,6 +74,10 @@ export default defineComponent({
     pageName: {
       type: String,
       required: true
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: {
@@ -87,17 +101,29 @@ export default defineComponent({
     };
     getPageData();
     //通过模块内的getters处理发送的相应模块数据
+    //处理数据列表
     const dataList = computed(() =>
       store.getters['systemModule/pageListData'](props.pageName)
     );
+    //处理所有数据的长度
     const dataCount = computed(() =>
       store.getters['systemModule/pageListCount'](props.pageName)
+    );
+    //动态插槽 ,拿到配置的插槽名
+    const otherTableSlot = props.pageContentConfig?.tableData.filter(
+      (item: any) => {
+        if (item.slotName === 'createAt') return false;
+        if (item.slotName === 'updateAt') return false;
+        if (item.slotName === 'handle') return false;
+        return true;
+      }
     );
     return {
       dataList,
       getPageData,
       pageInfo,
-      dataCount
+      dataCount,
+      otherTableSlot
     };
   }
 });

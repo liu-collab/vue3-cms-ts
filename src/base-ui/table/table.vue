@@ -9,6 +9,7 @@
       border
       style="width: 100%"
       @selection-change="handleSelectionChange"
+      v-bind="childrenProps"
     >
       <el-table-column
         v-if="showSelectcolumn"
@@ -24,7 +25,7 @@
         width="80px"
       ></el-table-column>
       <template v-for="item in tableData" :key="item.id">
-        <el-table-column v-bind="item" align="center">
+        <el-table-column v-bind="item" align="center" show-overflow-tooltip>
           <template #default="scope">
             <slot :name="item.slotName" :row="scope.row">
               {{ scope.row[item.prop] }}
@@ -82,6 +83,10 @@ export default defineComponent({
     page: {
       type: Object,
       default: () => ({ currentPage: 0, pageSize: 10 })
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: {},
@@ -90,6 +95,7 @@ export default defineComponent({
     const handleSelectionChange = (value: any) => {
       emit('changeSelect', value);
     };
+    //分页数据的总页数和每页数据改变时
     const handleSizeChange = (pageSize: number) => {
       emit('update:page', { ...props.page, pageSize });
     };
