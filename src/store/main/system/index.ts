@@ -58,7 +58,8 @@ const systemModule: Module<ISystemType, IRootState> = {
       // console.log(payload.queryInfo)
       //获取网页数据
       const pageListResult = await getPageListData(pageUrl, payload.queryInfo)
-      //console.log(pageListResult)
+
+      console.log(pageListResult)
       const { list, totalCount } = pageListResult.data
       //用字符串拼接来处理提交不同的mutations
       commit(`change${pageName}List`, list)

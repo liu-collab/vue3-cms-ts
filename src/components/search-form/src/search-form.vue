@@ -8,7 +8,12 @@
       </template>
       <template #footer>
         <div class="btn">
-          <el-button size="mini" type="success" icon="el-icon-search">
+          <el-button
+            size="mini"
+            type="success"
+            icon="el-icon-search"
+            @click="handleSearch"
+          >
             搜索</el-button
           >
           <el-button
@@ -36,7 +41,8 @@ export default defineComponent({
     }
   },
   components: { YQFrom },
-  setup(props) {
+  emits: ['handleResetData', 'handleSearchData'],
+  setup(props, { emit }) {
     //根据配置文件来获取输入框的数据
     const fromItems = props.searchConfig?.formItem ?? [];
     //保存输入框的数据
@@ -53,10 +59,16 @@ export default defineComponent({
         formData.value[`${key}`] = fromOriginData[key];
       }
       //formData.value = fromOriginData;
+      emit('handleResetData');
+    };
+    //搜索按钮
+    const handleSearch = () => {
+      emit('handleSearchData', formData.value);
     };
     return {
       handleRefresh,
-      formData
+      formData,
+      handleSearch
     };
   }
 });

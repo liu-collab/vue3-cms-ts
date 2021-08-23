@@ -67,19 +67,24 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     //通过发送相应的pageName去处理不同的网络请求模块
-    store.dispatch('systemModule/getPageListAction', {
-      pageName: props.pageName,
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    });
+    const getPageData = (searchInfo: any = {}) => {
+      store.dispatch('systemModule/getPageListAction', {
+        pageName: props.pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10,
+          ...searchInfo
+        }
+      });
+    };
+    getPageData();
     //通过模块内的getters处理发送的相应模块数据
     const dataList = computed(() =>
       store.getters['systemModule/pageListData'](props.pageName)
     );
     return {
-      dataList
+      dataList,
+      getPageData
     };
   }
 });

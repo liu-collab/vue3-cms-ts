@@ -19,6 +19,7 @@
                 <el-select
                   :placeholder="item.placeholder"
                   v-model="formData[`${item.field}`]"
+                  style="width: 100%"
                 >
                   <el-option
                     v-for="option in item.options"
@@ -61,7 +62,7 @@ export default defineComponent({
     },
     labelWidth: {
       type: String,
-      default: '120px'
+      default: '80px'
     },
     itemStyle: {
       type: Object,
