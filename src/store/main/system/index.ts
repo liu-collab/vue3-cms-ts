@@ -39,6 +39,11 @@ const systemModule: Module<ISystemType, IRootState> = {
         //     return state.roleList
         // }
       }
+    },
+    pageListCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
+      }
     }
   },
   actions: {
@@ -59,7 +64,7 @@ const systemModule: Module<ISystemType, IRootState> = {
       //获取网页数据
       const pageListResult = await getPageListData(pageUrl, payload.queryInfo)
 
-      console.log(pageListResult)
+      // console.log(pageListResult)
       const { list, totalCount } = pageListResult.data
       //用字符串拼接来处理提交不同的mutations
       commit(`change${pageName}List`, list)

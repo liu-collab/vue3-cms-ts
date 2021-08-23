@@ -1,7 +1,12 @@
 <template>
   <div class="user">
     <div class="user-info">
-      <YQTable v-bind="pageContentConfig" :userList="dataList">
+      <YQTable
+        v-bind="pageContentConfig"
+        :ListCounnt="dataCount"
+        :userList="dataList"
+        v-model:page="pageInfo"
+      >
         <template #handler>
           <div class="header-handle">
             <el-button type="primary" size="mini">新建用户</el-button>
@@ -47,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import YQTable from '@/base-ui/table';
 import { useStore } from '@/store';
 export default defineComponent({
@@ -66,13 +71,16 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
+
+    const pageInfo = ref({ currentPage: 0, pageSize: 10 });
+    watch(pageInfo, () => getPageData());
     //通过发送相应的pageName去处理不同的网络请求模块
     const getPageData = (searchInfo: any = {}) => {
       store.dispatch('systemModule/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
           ...searchInfo
         }
       });
@@ -82,9 +90,14 @@ export default defineComponent({
     const dataList = computed(() =>
       store.getters['systemModule/pageListData'](props.pageName)
     );
+    const dataCount = computed(() =>
+      store.getters['systemModule/pageListCount'](props.pageName)
+    );
     return {
       dataList,
-      getPageData
+      getPageData,
+      pageInfo,
+      dataCount
     };
   }
 });
