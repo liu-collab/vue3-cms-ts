@@ -1,6 +1,7 @@
 export interface ILoginType {
   token: string,
   userinfo: any,
-  userInfoMenu: any
+  userInfoMenu: any,
+  permission: string[]
 }
 

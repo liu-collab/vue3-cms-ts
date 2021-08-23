@@ -8,8 +8,8 @@
         v-model:page="pageInfo"
       >
         <template #handler>
-          <div class="header-handle">
-            <el-button type="primary" size="mini">新建用户</el-button>
+          <div class="header-handle" v-if="isCreate">
+            <el-button type="primary" size="mini">{{ newCreate }}</el-button>
             <el-button
               type="primary"
               size="mini"
@@ -33,10 +33,16 @@
         </template>
         <template #handle>
           <div class="handel-btns">
-            <el-button type="text" size="mini" icon="el-icon-edit">
+            <el-button
+              v-if="isUpdate"
+              type="text"
+              size="mini"
+              icon="el-icon-edit"
+            >
               编辑</el-button
             >
             <el-button
+              v-if="isDelete"
               class="delete"
               type="text"
               size="mini"
@@ -65,6 +71,7 @@
 import { defineComponent, computed, ref, watch } from 'vue';
 import YQTable from '@/base-ui/table';
 import { useStore } from '@/store';
+import { usePermission } from '@/hooks/usePermission';
 export default defineComponent({
   props: {
     pageContentConfig: {
@@ -75,21 +82,28 @@ export default defineComponent({
       type: String,
       required: true
     },
-    childrenProps: {
-      type: Object,
-      default: () => ({})
+    newCreate: {
+      type: String,
+      default: '新建用户'
     }
   },
   components: {
     YQTable
   },
   setup(props) {
+    const isCreate = usePermission(props.pageName, 'create');
+    const isUpdate = usePermission(props.pageName, 'update');
+    const isDelete = usePermission(props.pageName, 'delete');
+    const isQuery = usePermission(props.pageName, 'query');
+
     const store = useStore();
 
     const pageInfo = ref({ currentPage: 0, pageSize: 10 });
     watch(pageInfo, () => getPageData());
     //通过发送相应的pageName去处理不同的网络请求模块
     const getPageData = (searchInfo: any = {}) => {
+      //没有查询权限直接return
+      if (!isQuery) return;
       store.dispatch('systemModule/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
@@ -123,7 +137,10 @@ export default defineComponent({
       getPageData,
       pageInfo,
       dataCount,
-      otherTableSlot
+      otherTableSlot,
+      isCreate,
+      isDelete,
+      isUpdate
     };
   }
 });

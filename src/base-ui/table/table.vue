@@ -1,40 +1,42 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" v-if="showHeader">
       <slot class="title" name="title">{{ title }}</slot>
       <slot name="handler"></slot>
     </div>
-    <el-table
-      :data="userList"
-      border
-      style="width: 100%"
-      @selection-change="handleSelectionChange"
-      v-bind="childrenProps"
-    >
-      <el-table-column
-        v-if="showSelectcolumn"
-        type="selection"
-        align="center"
-        width="80px"
-      ></el-table-column>
-      <el-table-column
-        v-if="showIndecCloum"
-        type="index"
-        label="序号"
-        align="center"
-        width="80px"
-      ></el-table-column>
-      <template v-for="item in tableData" :key="item.id">
-        <el-table-column v-bind="item" align="center" show-overflow-tooltip>
-          <template #default="scope">
-            <slot :name="item.slotName" :row="scope.row">
-              {{ scope.row[item.prop] }}
-            </slot>
-          </template>
-        </el-table-column>
-      </template>
-    </el-table>
-    <div class="footer">
+    <div class="table">
+      <el-table
+        :data="userList"
+        border
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+        v-bind="childrenProps"
+      >
+        <el-table-column
+          v-if="showSelectcolumn"
+          type="selection"
+          align="center"
+          width="80px"
+        ></el-table-column>
+        <el-table-column
+          v-if="showIndecCloum"
+          type="index"
+          label="序号"
+          align="center"
+          width="80px"
+        ></el-table-column>
+        <template v-for="item in tableData" :key="item.id">
+          <el-table-column v-bind="item" align="center" show-overflow-tooltip>
+            <template #default="scope">
+              <slot :name="item.slotName" :row="scope.row">
+                {{ scope.row[item.prop] }}
+              </slot>
+            </template>
+          </el-table-column>
+        </template>
+      </el-table>
+    </div>
+    <div class="footer" v-if="showFooter">
       <slot name="footer-page">
         <el-pagination
           @size-change="handleSizeChange"
@@ -87,6 +89,14 @@ export default defineComponent({
     childrenProps: {
       type: Object,
       default: () => ({})
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
+    showFooter: {
+      type: Boolean,
+      default: true
     }
   },
   components: {},
@@ -117,6 +127,9 @@ export default defineComponent({
   padding: 20px 5px;
   align-items: center;
   justify-content: space-between;
+}
+.table {
+  padding: 0 0 20px 0;
 }
 .footer {
   display: flex;

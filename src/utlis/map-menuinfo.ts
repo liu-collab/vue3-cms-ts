@@ -59,4 +59,21 @@ export function pathMapToMenu(userInfoMenu: any[], currentPath: string, breadCru
   }
 }
 
+//查找权限
+export function mapMenuInfoToPermisssion(userMenuInfo: any) {
+  const permission: string[] = []
+
+  function _recurseGeTPermission(menus: any[]) {
+    for (const menu of menus) {
+      if (menu.type === 1 || menu.type === 2) {
+        _recurseGeTPermission(menu.children ?? [])
+      } else if (menu.type === 3) {
+        permission.push(menu.permission)
+      }
+    }
+  }
+  _recurseGeTPermission(userMenuInfo)
+  return permission
+}
+
 export { fistMenu }

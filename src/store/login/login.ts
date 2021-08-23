@@ -4,7 +4,7 @@ import { Module } from 'vuex'
 import { accountLoginRequest, userinfoRequest, userMenuRequest } from '@/service/login/login'
 import LocalCache from '@/utlis/Cache'
 import router from '@/router'
-import { mapMenuInfo, } from '@/utlis/map-menuinfo'
+import { mapMenuInfo, mapMenuInfoToPermisssion } from '@/utlis/map-menuinfo'
 
 import { IAccount } from '@/service/login/type'
 import { ILoginType } from './type'
@@ -16,7 +16,8 @@ const loginModule: Module<ILoginType, IRootState> = {
     return {
       token: '',
       userinfo: {},
-      userInfoMenu: []
+      userInfoMenu: [],
+      permission: []
     }
   },
   mutations: {
@@ -35,7 +36,11 @@ const loginModule: Module<ILoginType, IRootState> = {
       routes.forEach(route => {
         router.addRoute('main', route)
       })
+      //保存用户权限
+      const permission = mapMenuInfoToPermisssion(userInfoMenu)
+      state.permission = permission
     }
+
   },
   actions: {
     async accountAction({ commit }, paload: IAccount) {

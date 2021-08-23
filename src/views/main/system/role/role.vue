@@ -4,6 +4,7 @@
     <page-content
       :pageContentConfig="pageContentConfig"
       pageName="role"
+      newCreate="新建角色"
     ></page-content>
   </div>
 </template>

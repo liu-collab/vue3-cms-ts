@@ -3,6 +3,7 @@
     <page-content
       :pageContentConfig="pageContentConfig"
       pageName="menu"
+      newCreate="新建菜单"
     ></page-content>
   </div>
 </template>

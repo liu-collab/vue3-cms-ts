@@ -1,8 +1,9 @@
 
 const pageContentConfig = {
   title: '菜单列表',
+
   tableData: [
-    { prop: 'name', label: '菜单名称', minWidth: '100' },
+    { prop: 'name', label: '菜单名称', minWidth: '120' },
     { prop: 'type', label: '类型', minWidth: '60' },
     { prop: 'url', label: '菜单url', minWidth: '100' },
     { prop: 'icon', label: '菜单icon', minWidth: '100' },
@@ -19,7 +20,7 @@ const pageContentConfig = {
       minWidth: '220',
       slotName: 'updateAt'
     },
-    { label: '操作', minWidth: '120', slotName: 'handler' }
+    { label: '操作', minWidth: '120', slotName: 'handle' }
   ],
   showIndexColumn: false,
   showSelectColumn: false,
@@ -29,6 +30,7 @@ const pageContentConfig = {
       children: 'children'
     }
   },
+  showFooter: false
 }
 
 export { pageContentConfig }
