@@ -50,16 +50,12 @@ export default defineComponent({
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 100%;
-
-  overflow: hidden;
   .el-containers {
     height: 100%;
     .asides {
       background-color: #a6a7c0;
-
-      overflow: hidden;
     }
     .bgc {
       background-color: #d8d9f5;
@@ -69,13 +65,12 @@ export default defineComponent({
     }
     .v-enter-active,
     .v-leave-active {
-      transition: all 0.3s;
+      transition: all 0.5s;
     }
 
     .el-maincontent {
       padding: 0;
 
-      overflow: hidden;
       .heades {
         display: flex;
         align-content: center;

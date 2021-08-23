@@ -11,7 +11,11 @@
           <el-button size="mini" type="success" icon="el-icon-search">
             搜索</el-button
           >
-          <el-button size="mini" type="primary" icon="el-icon-refresh"
+          <el-button
+            size="mini"
+            type="primary"
+            icon="el-icon-refresh"
+            @click="handleRefresh"
             >重置</el-button
           >
         </div>
@@ -32,15 +36,28 @@ export default defineComponent({
     }
   },
   components: { YQFrom },
-  setup() {
-    const formData = ref({
-      id: '',
-      name: '',
-      password: '',
-      option: '',
-      createTime: ''
-    });
-    return { formData };
+  setup(props) {
+    //根据配置文件来获取输入框的数据
+    const fromItems = props.searchConfig?.formItem ?? [];
+    //保存输入框的数据
+    const fromOriginData: any = {};
+    for (const item of fromItems) {
+      fromOriginData[item.field] = '';
+    }
+    //将输入框的数据赋值给表单数据
+    const formData = ref(fromOriginData);
+    //刷新按钮
+    const handleRefresh = () => {
+      //遍历输入框的数据
+      for (const key in fromOriginData) {
+        formData.value[`${key}`] = fromOriginData[key];
+      }
+      //formData.value = fromOriginData;
+    };
+    return {
+      handleRefresh,
+      formData
+    };
   }
 });
 </script>

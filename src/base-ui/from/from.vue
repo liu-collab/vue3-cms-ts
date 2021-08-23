@@ -81,8 +81,10 @@ export default defineComponent({
   components: {},
   emits: ['update:modelValue'],
   setup(props, { emit }) {
+    //需要使用双向绑定
     //将数据进行拷贝,再取出相应的值
     const formData = ref({ ...props.modelValue });
+
     //深度监听数据的改变,当输入框的数据发生改变,发射事件
     watch(
       formData,
@@ -91,7 +93,12 @@ export default defineComponent({
       },
       { deep: true }
     );
+    //这里将双向绑定进行拆解
+    // const handleModelValue = (value: any, field: string) => {
+    //   emit('update:modelValue', { ...props.modelValue, [field]: value });
+    // };
     return {
+      // handleModelValue
       formData
     };
   }
