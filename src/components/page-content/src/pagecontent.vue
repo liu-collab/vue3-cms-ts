@@ -31,7 +31,7 @@
         <template #updateAt="scope">
           <span>{{ $filters.formatTime(scope.row.updateAt) }}</span>
         </template>
-        <template #handle>
+        <template #handle="scope">
           <div class="handel-btns">
             <el-button
               v-if="isUpdate"
@@ -47,6 +47,7 @@
               type="text"
               size="mini"
               icon="el-icon-delete"
+              @click="handleDeleteData(scope.row)"
             >
               删除</el-button
             >
@@ -91,6 +92,7 @@ export default defineComponent({
     YQTable
   },
   setup(props) {
+    //权限验证
     const isCreate = usePermission(props.pageName, 'create');
     const isUpdate = usePermission(props.pageName, 'update');
     const isDelete = usePermission(props.pageName, 'delete');
@@ -98,7 +100,7 @@ export default defineComponent({
 
     const store = useStore();
 
-    const pageInfo = ref({ currentPage: 0, pageSize: 10 });
+    const pageInfo = ref({ currentPage: 1, pageSize: 10 });
     watch(pageInfo, () => getPageData());
     //通过发送相应的pageName去处理不同的网络请求模块
     const getPageData = (searchInfo: any = {}) => {
@@ -107,7 +109,7 @@ export default defineComponent({
       store.dispatch('systemModule/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
           size: pageInfo.value.pageSize,
           ...searchInfo
         }
@@ -132,6 +134,15 @@ export default defineComponent({
         return true;
       }
     );
+    //删除/编辑相关操作
+    const handleDeleteData = (item: any) => {
+      console.log(item);
+      store.dispatch('systemModule/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id
+      });
+    };
+
     return {
       dataList,
       getPageData,
@@ -140,7 +151,8 @@ export default defineComponent({
       otherTableSlot,
       isCreate,
       isDelete,
-      isUpdate
+      isUpdate,
+      handleDeleteData
     };
   }
 });

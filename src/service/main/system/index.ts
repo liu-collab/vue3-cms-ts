@@ -6,3 +6,9 @@ export function getPageListData(url: string, queryInfo: any) {
     data: queryInfo
   })
 }
+
+export function delelePageData(url: string) {
+  return Request.delete<IReustType>({
+    url: url
+  })
+}

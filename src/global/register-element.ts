@@ -33,6 +33,7 @@ import {
   ElTableColumn,
   ElPagination,
   ElImage,
+  ElMessage,
 } from 'element-plus'
 
 const components = [
@@ -67,11 +68,19 @@ const components = [
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+
+]
+const plugins = [
+  ElMessage
 ]
 
 export default function (app: App): void {
   for (const component of components) {
     app.component(component.name, component)
   }
+  for (const plugin of plugins) {
+    app.use(plugin)
+  }
 }
+

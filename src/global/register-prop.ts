@@ -1,5 +1,6 @@
 import { App } from "vue";
 import formUtcTime from "@/utlis/formatUtcTime";
+import { ElMessage } from "element-plus";
 export default function registerProp(app: App) {
   //注册全局属性
   app.config.globalProperties.$filters = {
@@ -8,4 +9,5 @@ export default function registerProp(app: App) {
       return formUtcTime(value)
     }
   }
+
 }

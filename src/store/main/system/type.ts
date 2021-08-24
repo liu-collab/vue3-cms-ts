@@ -14,5 +14,6 @@ export interface IPayloadType {
 
   pageName: string
   pageUrl: string
+  id?: string | number
   queryInfo: any
 }
