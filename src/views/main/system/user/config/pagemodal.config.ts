@@ -1,5 +1,5 @@
-
-const pageModalConfig = {
+import { IForm } from "@/base-ui"
+const pageModalConfig: IForm = {
   formItem: [
     {
       type: 'input',
@@ -12,7 +12,8 @@ const pageModalConfig = {
       type: 'password',
       field: 'password',
       label: '密码',
-      placeholder: '请输入密码'
+      placeholder: '请输入密码',
+      isHidden: false
     },
     {
       type: 'input',
@@ -26,10 +27,24 @@ const pageModalConfig = {
       label: '手机号码',
       placeholder: '请输入手机号码'
     },
+    {
+      type: 'select',
+      field: 'departmentId',
+      label: '部门',
+      placeholder: '请选择部门',
+      options: []
+    },
+    {
+      type: 'select',
+      field: 'roleId',
+      label: '角色',
+      placeholder: '请选择角色',
+      options: []
+    },
   ],
   labelWidth: '80px',
   itemStyle: {
-    padding: '5px 30px'
+    padding: '-5px 20px'
   },
   collLayout: { span: 24 }
 

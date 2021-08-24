@@ -1,7 +1,9 @@
 import { ref } from "vue";
 import pageModal from '@/components/page-modal';
 
-export function useModalValue() {
+type CallbackFn = () => void
+
+export function useModalValue(editCb?: CallbackFn, newCb?: CallbackFn) {
   const pageModalRef = ref<InstanceType<typeof pageModal>>();
   const defaultInfo = ref({});
   const handleEditData = (item: any) => {
@@ -9,11 +11,16 @@ export function useModalValue() {
     if (pageModalRef.value) {
       pageModalRef.value.btnDialogVisible = true;
     }
+    editCb && editCb()
   };
   const handleNewData = () => {
+    //点击新建按钮重置表单
+    defaultInfo.value = {}
     if (pageModalRef.value) {
       pageModalRef.value.btnDialogVisible = true;
     }
+
+    newCb && newCb()
   };
 
   return [pageModalRef, defaultInfo, handleEditData, handleNewData]

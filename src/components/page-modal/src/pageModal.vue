@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-dialog title="新建用户" v-model="btnDialogVisible" width="30%" center>
+    <el-dialog
+      title="新建用户"
+      v-model="btnDialogVisible"
+      destroy-on-close
+      width="30%"
+      center
+    >
       <YQFrom v-bind="modalConfig" v-model="tbaleData"></YQFrom>
       <template #footer>
         <span>

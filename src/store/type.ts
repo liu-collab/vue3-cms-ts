@@ -2,7 +2,10 @@ import { ISystemType } from './main/system/type';
 import { ILoginType } from "./login/type";
 export interface IRootState {
   name: string,
-  age: number
+  age: number,
+  entireDepartment: any[],
+  entireRole: any[]
+
 }
 
 export interface IRootWithModule {

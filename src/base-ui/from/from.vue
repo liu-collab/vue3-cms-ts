@@ -5,7 +5,11 @@
       <el-row>
         <template v-for="item in formItem" :key="item.label">
           <el-col v-bind="collLayout">
-            <el-form-item :label="item.label" :style="itemStyle">
+            <el-form-item
+              :label="item.label"
+              :style="itemStyle"
+              v-if="!item.isHidden"
+            >
               <template
                 v-if="item.type === 'input' || item.type === 'password'"
               >

@@ -11,18 +11,13 @@ export interface IFormType {
   placeholder?: string
   rules?: any[],
   options?: OptionType[],
-  otherOptions?: any
+  otherOptions?: any,
+  isHidden?: boolean
 }
-interface ILayoutType {
-  xs?: number,
-  xm?: number,
-  md?: number,
-  lg?: number,
-  xl?: number
-}
+
 export interface IForm {
   formItem: IFormType[],
-  collLayout?: ILayoutType,
+  collLayout?: any,
   labelWidth?: string,
   itemStyle?: any
 }

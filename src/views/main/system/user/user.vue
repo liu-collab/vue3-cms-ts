@@ -12,17 +12,18 @@
       @handleEditClick="handleEditData"
       @handleNewClick="handleNewData"
     ></page-content>
-    ,
+
     <page-modal
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
-      :modalConfig="pageModalConfig"
+      :modalConfig="pageModalConfigRef"
     ></page-modal>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
+import { useStore } from '@/store';
 
 import searchFormPage from '@/components/search-form';
 import pageContent from '@/components/page-content/src/pagecontent.vue';
@@ -45,12 +46,46 @@ export default defineComponent({
   setup() {
     const [pageContentRef, handleResetResult, handleSearchResult] =
       usePageContent();
+    //modal相关hook
+    const editCallback = () => {
+      const passwordItm = pageModalConfig.formItem.find(
+        (item) => item.field === 'password'
+      );
+      passwordItm!.isHidden = true;
+    };
+    const newCallback = () => {
+      const passwordItm = pageModalConfig.formItem.find(
+        (item) => item.field === 'password'
+      );
+      passwordItm!.isHidden = false;
+    };
+    //函数科里化
     const [pageModalRef, defaultInfo, handleEditData, handleNewData] =
-      useModalValue();
+      useModalValue(editCallback, newCallback);
+    //动态添加部门和角色
+    //从vuex中获取到部门和角色的数据,赋值给配置文件下拉框中的options中
+    //利用computed返回一个响应式的数据
+    const store = useStore();
+    const pageModalConfigRef = computed(() => {
+      const departmentItem = pageModalConfig.formItem.find(
+        (item) => item.field === 'departmentId'
+      );
+      departmentItem!.options = store.state.entireDepartment.map((item) => {
+        return { title: item.name, value: item.id };
+      });
+
+      const roleItem = pageModalConfig.formItem.find(
+        (item) => item.field === 'roleId'
+      );
+      roleItem!.options = store.state.entireRole.map((item) => {
+        return { title: item.name, value: item.id };
+      });
+      return pageModalConfig;
+    });
     return {
       searchFormConfig,
       pageContentConfig,
-      pageModalConfig,
+      pageModalConfigRef,
       handleResetResult,
       handleSearchResult,
       pageContentRef,

@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'prettier/prettier': 'off',
     '@typescript-eslint/no-explicit-any':'off',
-    'vue/no-parsing-error':'off'
+    'vue/no-parsing-error':'off',
+    '@typescript-eslint/no-non-null-assertion':'off'
   },
 };
