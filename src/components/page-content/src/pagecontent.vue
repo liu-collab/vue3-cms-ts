@@ -4,12 +4,14 @@
       <YQTable
         v-bind="pageContentConfig"
         :ListCounnt="dataCount"
-        :userList="dataList"
+        :ListData="dataList"
         v-model:page="pageInfo"
       >
         <template #handler>
           <div class="header-handle" v-if="isCreate">
-            <el-button type="primary" size="mini">{{ newCreate }}</el-button>
+            <el-button @click="handleNewClick" type="primary" size="mini">{{
+              newCreate
+            }}</el-button>
             <el-button
               type="primary"
               size="mini"
@@ -38,6 +40,7 @@
               type="text"
               size="mini"
               icon="el-icon-edit"
+              @click="handelEditClick(scope.row)"
             >
               编辑</el-button
             >
@@ -91,7 +94,8 @@ export default defineComponent({
   components: {
     YQTable
   },
-  setup(props) {
+  emits: ['handleNewClick', 'handleEditClick'],
+  setup(props, { emit }) {
     //权限验证
     const isCreate = usePermission(props.pageName, 'create');
     const isUpdate = usePermission(props.pageName, 'update');
@@ -142,6 +146,12 @@ export default defineComponent({
         id: item.id
       });
     };
+    const handleNewClick = () => {
+      emit('handleNewClick');
+    };
+    const handelEditClick = (item: any) => {
+      emit('handleEditClick', item);
+    };
 
     return {
       dataList,
@@ -152,7 +162,9 @@ export default defineComponent({
       isCreate,
       isDelete,
       isUpdate,
-      handleDeleteData
+      handleDeleteData,
+      handleNewClick,
+      handelEditClick
     };
   }
 });

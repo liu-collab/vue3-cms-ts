@@ -6,7 +6,7 @@
     </div>
     <div class="table">
       <el-table
-        :data="userList"
+        :data="ListData"
         border
         style="width: 100%"
         @selection-change="handleSelectionChange"
@@ -58,7 +58,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   props: {
-    userList: {
+    ListData: {
       type: Array,
       required: true
     },

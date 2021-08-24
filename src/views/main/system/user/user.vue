@@ -9,7 +9,15 @@
       :pageContentConfig="pageContentConfig"
       pageName="users"
       ref="pageContentRef"
+      @handleEditClick="handleEditData"
+      @handleNewClick="handleNewData"
     ></page-content>
+    ,
+    <page-modal
+      :defaultInfo="defaultInfo"
+      ref="pageModalRef"
+      :modalConfig="pageModalConfig"
+    ></page-modal>
   </div>
 </template>
 
@@ -18,27 +26,38 @@ import { defineComponent } from 'vue';
 
 import searchFormPage from '@/components/search-form';
 import pageContent from '@/components/page-content/src/pagecontent.vue';
+import pageModal from '@/components/page-modal/src/pageModal.vue';
 
 import { searchFormConfig } from './config/searchform.config';
 import { pageContentConfig } from './config/pagecontent.config';
+import { pageModalConfig } from './config/pagemodal.config';
 
 import { usePageContent } from '@/hooks/usePageContent';
+import { useModalValue } from '@/hooks/useModalValue';
 export default defineComponent({
   name: 'user',
 
   components: {
     searchFormPage,
-    pageContent
+    pageContent,
+    pageModal
   },
   setup() {
     const [pageContentRef, handleResetResult, handleSearchResult] =
       usePageContent();
+    const [pageModalRef, defaultInfo, handleEditData, handleNewData] =
+      useModalValue();
     return {
       searchFormConfig,
       pageContentConfig,
+      pageModalConfig,
       handleResetResult,
       handleSearchResult,
-      pageContentRef
+      pageContentRef,
+      handleEditData,
+      handleNewData,
+      pageModalRef,
+      defaultInfo
     };
   }
 });

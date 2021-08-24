@@ -1,10 +1,11 @@
+
 export const returnCode = (code: any) => {
-  switch (code) {
-    case code < 0:
-      return 'warning'
-      break;
-    case code > 0:
-      return 'success'
-      break;
+  const retucode = parseInt(code)
+  if (retucode >= 0) {
+    return 'success'
+  } else if (retucode < 0) {
+    return 'warning'
+  } else {
+    return 'error'
   }
 }
