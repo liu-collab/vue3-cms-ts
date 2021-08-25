@@ -1,6 +1,8 @@
 import { ref } from "vue";
 import pageContent from "@/components/page-content";
 
+
+
 export function usePageContent() {
   const pageContentRef = ref<InstanceType<typeof pageContent>>();
   const handleResetResult = () => {

@@ -14,6 +14,7 @@ const Request = new YQRequest({
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
+
       // console.log(config.headers.Authorization)
       //  console.log("请求拦截成功")
       return config

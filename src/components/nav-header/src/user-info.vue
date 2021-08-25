@@ -10,7 +10,10 @@
           <el-dropdown-item icon="el-icon-s-tools" divided
             >修改密码</el-dropdown-item
           >
-          <el-dropdown-item icon="el-icon-s-promotion" divided
+          <el-dropdown-item
+            icon="el-icon-s-promotion"
+            divided
+            @click="handleExit"
             >退出系统</el-dropdown-item
           >
         </el-dropdown-menu>
@@ -22,14 +25,24 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useStore } from '@/store';
+import LocalCahe from '@/utlis/Cache';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   components: {},
   setup() {
     const store = useStore();
+    const router = useRouter();
     const name = computed(() => store.state.loginModule.userinfo.name);
+    const handleExit = () => {
+      //清除登录信息
+      LocalCahe.claerCache();
+      //重定向
+      router.replace('/login');
+    };
     return {
-      name
+      name,
+      handleExit
     };
   }
 });

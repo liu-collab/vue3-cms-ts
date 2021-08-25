@@ -43,7 +43,7 @@ export default defineComponent({
     YQFrom
   },
   setup(props) {
-    const btnDialogVisible = ref(true);
+    const btnDialogVisible = ref(false);
     const tbaleData = ref<any>({});
     watch(
       () => props.defaultInfo,

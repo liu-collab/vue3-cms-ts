@@ -62,7 +62,7 @@ class YQRequest {
       return error
     })
   }
-  request<T>(config: YQRequestConfig<T>): Promise<T> {
+  request<T = any>(config: YQRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptors) {
         config = config.interceptors.requestInterceptors(config)
@@ -78,29 +78,31 @@ class YQRequest {
           if (config.interceptors?.responseInterceptors) {
             res = config.interceptors.responseInterceptors(res)
           }
-          // console.log(res)
-          resolve(res)
           //请求loading组件关闭之后打开
           this.showLoading = true
+          // console.log(res)
+          resolve(res)
+
         })
         .catch(error => {
           //请求loading组件关闭之后打开
           this.showLoading = true
           reject(error)
           // console.log(error)
+          return error
         })
     })
   }
-  get<T>(config: YQRequestConfig<T>): Promise<T> {
-    return this.request<T>({ ...config, method: "GET" })
+  get<T = any>(config: YQRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
   }
-  post<T>(config: YQRequestConfig<T>): Promise<T> {
+  post<T = any>(config: YQRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "POST" })
   }
-  delete<T>(config: YQRequestConfig<T>): Promise<T> {
+  delete<T = any>(config: YQRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "DELETE" })
   }
-  patch<T>(config: YQRequestConfig<T>): Promise<T> {
+  patch<T = any>(config: YQRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "PATCH" })
   }
 }

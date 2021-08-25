@@ -8,16 +8,25 @@ module.export = {
   //     components: '@/components',
   //   }
   // },
-  devServer: {
-  host:'localhost',
-  port:8080,
-  proxy: {
-      '^/api': {
+  // devServer: {
+  // host:'localhost',
+  // port:8080,
+  // proxy: {
+  //     '^/api': {
+  //       target: 'http://152.136.185.210:5000',
+  //       pathRewrite: {
+  //         '^/api': ''
+  //       },
+  //       changeOrigin: true
+  //     }
+  //   }
+  // },
+   devServer: {
+    proxy: {
+      '/api': {
         target: 'http://152.136.185.210:5000',
-        pathRewrite: {
-          '^/api': ''
-        },
-        changeOrigin: true
+        pathRewrite: {  '^/api': '' },
+        changeOrigin: true,
       }
     }
   },

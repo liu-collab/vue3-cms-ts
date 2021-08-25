@@ -6,7 +6,9 @@ export interface ISystemType {
   goodsList: any
   goodsCount: number
   menuList: any
-  menuCount: number
+  menuCount: number,
+  departmentList: any
+  departmentCount: number
 }
 
 export interface IPayloadType {
