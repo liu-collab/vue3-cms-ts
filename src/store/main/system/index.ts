@@ -3,7 +3,7 @@ import { Module } from "vuex";
 
 import { IRootState } from './../../type';
 import { ISystemType, IPayloadType } from "./type";
-import { getPageListData, delelePageData } from "@/service/main/system";
+import { getPageListData, delelePageData, createPageData, editPageData } from "@/service/main/system";
 import { returnCode } from '@/utlis/returnCode'
 const systemModule: Module<ISystemType, IRootState> = {
   namespaced: true,
@@ -65,6 +65,7 @@ const systemModule: Module<ISystemType, IRootState> = {
     }
   },
   actions: {
+    //请求数据列表网络请求
     async getPageListAction({ commit }, payload: IPayloadType) {
       const pageName = payload.pageName
       const pageUrl = `/${pageName}/list`
@@ -88,12 +89,57 @@ const systemModule: Module<ISystemType, IRootState> = {
       commit(`change${pageName}List`, list)
       commit(`change${pageName}Count`, totalCount)
     },
+    //删除网络请求
     async deletePageDataAction({ dispatch }, payload: IPayloadType) {
       const { pageName, id } = payload
       //拼接地址
       const pageUrl = `/${pageName}/${id}`
       //删除请求
       const { code, data } = await delelePageData(pageUrl)
+      console.log(data, code)
+      //消息提示
+      ElMessage({
+        showClose: true,
+        message: data,
+        type: returnCode(code)
+
+      })
+      //重新请求数据
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
+    },
+    async createPageDataAction({ dispatch }, payload: IPayloadType) {
+
+      const { pageName, newData } = payload
+      const pageUrl = `/${pageName}`
+
+      const { code, data } = await createPageData(pageUrl, newData)
+
+      //消息提示
+      ElMessage({
+        showClose: true,
+        message: data,
+        type: returnCode(code)
+
+      })
+      //重新请求数据
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
+    },
+    async editPageDataAction({ dispatch }, payload: IPayloadType) {
+      const { pageName, editData, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      const { code, data } = await editPageData(pageUrl, editData)
       console.log(data, code)
       //消息提示
       ElMessage({

@@ -23,6 +23,7 @@ const store = createStore<IRootState>({
     }
   },
   actions: {
+    //获取部门和角色列表数据
     async getInitialData({ commit }) {
       const DepartMentResult = await getPageListData('/department/list', {
         offset: 0,

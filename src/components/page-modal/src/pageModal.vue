@@ -11,7 +11,7 @@
       <template #footer>
         <span>
           <el-button @click="btnDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="btnDialogVisible = false"
+          <el-button type="primary" @click="handleConfirmClick"
             >确 定</el-button
           >
         </span>
@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
+import { useStore } from '@/store';
 import YQFrom from '@/base-ui';
 export default defineComponent({
   props: {
@@ -32,6 +33,10 @@ export default defineComponent({
     defaultInfo: {
       type: Object,
       default: () => ({})
+    },
+    pageName: {
+      type: String,
+      reuquired: true
     }
   },
   components: {
@@ -48,9 +53,31 @@ export default defineComponent({
         }
       }
     );
+    //新建和编辑用户
+    const store = useStore();
+    const handleConfirmClick = () => {
+      btnDialogVisible.value = false;
+      console.log(tbaleData);
+      console.log(Object.keys(props.defaultInfo).length);
+      if (Object.keys(props.defaultInfo).length) {
+        //编辑操作
+        store.dispatch('systemModule/editPageDataAction', {
+          pageName: props.pageName,
+          editData: { ...tbaleData.value },
+          id: props.defaultInfo.id
+        });
+      } else {
+        //新建操作
+        store.dispatch('systemModule/createPageDataAction', {
+          pageName: props.pageName,
+          newData: { ...tbaleData.value }
+        });
+      }
+    };
     return {
       btnDialogVisible,
-      tbaleData
+      tbaleData,
+      handleConfirmClick
     };
   }
 });
