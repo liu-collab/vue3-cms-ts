@@ -25,6 +25,7 @@ export const searchFormConfig: IForm = {
         type: 'daterange'
       }
     }
+
   ],
   labelWidth: '100px',
   itemStyle: {

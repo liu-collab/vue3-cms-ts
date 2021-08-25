@@ -5,5 +5,6 @@ export const pageContentConfig = {
     { prop: 'intro', label: '部门', minWidth: '120', slotName: 'intro' },
     { prop: 'createAt', label: '创建时间', minWidth: '120', slotName: 'createAt' },
     { prop: 'updateAt', label: '更新时间', minWidth: '120', slotName: 'updateAt' },
+    { label: '操作', minWidth: '120', slotName: 'handle' }
   ]
 }
