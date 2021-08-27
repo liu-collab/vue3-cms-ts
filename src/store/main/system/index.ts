@@ -158,7 +158,7 @@ const systemModule: Module<ISystemType, IRootState> = {
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
       const { code, data } = await editPageData(pageUrl, editData)
-      console.log(data, code)
+
       //消息提示
       ElMessage({
         showClose: true,

@@ -3,12 +3,12 @@ import { createStore, Store, useStore as usevuexStore } from 'vuex';
 import { IRootState, IRootType } from './type';
 import loginModule from './login/login';
 import systemModule from './main/system';
+import dashboardModule from './main/alalysis/dashboard';
 import { getPageListData } from '@/service/main/system';
 const store = createStore<IRootState>({
   state: () => {
     return {
-      name: 'jack',
-      age: 18,
+
       entireDepartment: [],
       entireRole: [],
       entireMenu: []
@@ -40,7 +40,7 @@ const store = createStore<IRootState>({
       })
       //获取权限列表
       const menuResult = await getPageListData('menu/list', {})
-      console.log(menuResult)
+
       const { list: DeList } = DepartMentResult.data
       const { list: RoelList } = RoleResult.data
       const { list: menuList } = menuResult.data
@@ -54,7 +54,8 @@ const store = createStore<IRootState>({
 
   modules: {
     loginModule,
-    systemModule
+    systemModule,
+    dashboardModule
   }
 
 });

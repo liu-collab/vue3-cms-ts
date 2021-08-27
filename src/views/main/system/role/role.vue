@@ -26,6 +26,7 @@
         :data="menus"
         node-key="id"
         @check="handleCheckMenu"
+        ref="EltreeRef"
       >
       </el-tree>
     </page-modal>
@@ -33,12 +34,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, nextTick } from 'vue';
 import { useStore } from '@/store';
+import { mapMenuLeaf } from '@/utlis/map-menuinfo';
 import searchFormPage from '@/components/search-form';
 import pageContent from '@/components/page-content/src/pagecontent.vue';
 import pageModal from '@/components/page-modal/src/pageModal.vue';
-
+import { ElTree } from 'element-plus';
 import { pageContentConfig } from './config/pagerolecontent';
 import { searchFormConfig } from './config/searchform.config';
 import { pageModalConfig } from './config/pagemodal.config';
@@ -53,10 +55,20 @@ export default defineComponent({
     pageModal
   },
   setup() {
+    const EltreeRef = ref<InstanceType<typeof ElTree>>();
+    const editCallback = (item: any) => {
+      //将绑定的操作往后推,在点击的这一刻来不及将数据绑定上去
+      nextTick(() => {
+        //用递归遍历叶子节点
+        const leakey = mapMenuLeaf(item.menuList);
+        //将遍历的子节点设置在ELTree上
+        EltreeRef.value?.setCheckedKeys(leakey, false);
+      });
+    };
     const [pageContentRef, handleResetResult, handleSearchResult] =
       usePageContent();
     const [pageModalRef, defaultInfo, handleEditData, handleNewData] =
-      useModalValue();
+      useModalValue(editCallback, undefined);
     const store = useStore();
     const menus = computed(() => store.state.entireMenu);
 
@@ -82,7 +94,8 @@ export default defineComponent({
       handleNewData,
       menus,
       otherInfo,
-      handleCheckMenu
+      handleCheckMenu,
+      EltreeRef
     };
   }
 });

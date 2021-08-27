@@ -76,4 +76,21 @@ export function mapMenuInfoToPermisssion(userMenuInfo: any) {
   return permission
 }
 
+//对权限的叶子节点进行查找;
+export function mapMenuLeaf(menuList: any) {
+  const leafKeys: number[] = []
+
+  function _recurseGetLeaf(memuList: any) {
+    for (const menus of memuList) {
+      if (menus.children) {
+        _recurseGetLeaf(menus.children)
+      } else {
+        leafKeys.push(menus.id)
+      }
+    }
+  }
+  _recurseGetLeaf(menuList)
+  return leafKeys
+}
+
 export { fistMenu }
