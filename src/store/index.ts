@@ -10,7 +10,8 @@ const store = createStore<IRootState>({
       name: 'jack',
       age: 18,
       entireDepartment: [],
-      entireRole: []
+      entireRole: [],
+      entireMenu: []
     };
   },
   getters: {},
@@ -20,6 +21,9 @@ const store = createStore<IRootState>({
     },
     changeRoleList(state, list) {
       state.entireRole = list
+    },
+    chnageMenuList(state, list) {
+      state.entireMenu = list
     }
   },
   actions: {
@@ -34,10 +38,16 @@ const store = createStore<IRootState>({
         offset: 0,
         size: 100
       })
+      //获取权限列表
+      const menuResult = await getPageListData('menu/list', {})
+      console.log(menuResult)
       const { list: DeList } = DepartMentResult.data
       const { list: RoelList } = RoleResult.data
+      const { list: menuList } = menuResult.data
+
       commit('changeDepartmentList', DeList)
       commit('changeRoleList', RoelList)
+      commit('chnageMenuList', menuList)
 
     }
   },

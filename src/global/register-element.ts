@@ -35,6 +35,7 @@ import {
   ElImage,
   ElMessage,
   ElDialog,
+  ElTree,
 } from 'element-plus'
 
 const components = [
@@ -70,7 +71,8 @@ const components = [
   ElTableColumn,
   ElPagination,
   ElImage,
-  ElDialog
+  ElDialog,
+  ElTree
 
 ]
 const plugins = [

@@ -36,9 +36,9 @@ export default defineComponent({
     const name = computed(() => store.state.loginModule.userinfo.name);
     const handleExit = () => {
       //清除登录信息
-      LocalCahe.claerCache();
+      LocalCahe.removeCache('token');
       //重定向
-      router.replace('/login');
+      router.push('/main');
     };
     return {
       name,

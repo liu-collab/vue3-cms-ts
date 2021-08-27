@@ -43,12 +43,16 @@ const loginModule: Module<ILoginType, IRootState> = {
 
   },
   actions: {
-    async accountAction({ commit }, paload: IAccount) {
+    async accountAction({ commit, dispatch }, paload: IAccount) {
       const result = await accountLoginRequest(paload)
       //1.获取token,进行保存
       const { id, token } = result.data
       commit('changeToken', token)
       LocalCache.setCache('token', token)
+
+      //获取初始化的数据
+      dispatch('getInitialData', null, { root: true })
+
       //2.根据id获取用户信息
       const userinfoResult = await userinfoRequest(id)
       const userInfo = userinfoResult.data
@@ -64,10 +68,13 @@ const loginModule: Module<ILoginType, IRootState> = {
       router.push('/main')
     },
     //每次刷新重本地获取数据重新提交到vuex中,保持数据持久化
-    LocalLogin({ commit }) {
+    LocalLogin({ commit, dispatch }) {
       const token = LocalCache.getCache('token')
       if (token) {
         commit('changeToken', token)
+
+        //获取初始化的数据
+        dispatch('getInitialData', null, { root: true })
       }
       const userInfo = LocalCache.getCache('userInfo')
       if (userInfo) {

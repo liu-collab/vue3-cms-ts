@@ -8,6 +8,7 @@
       center
     >
       <YQFrom v-bind="modalConfig" v-model="tbaleData"></YQFrom>
+      <slot></slot>
       <template #footer>
         <span>
           <el-button @click="btnDialogVisible = false">取 消</el-button>
@@ -31,6 +32,10 @@ export default defineComponent({
       required: true
     },
     defaultInfo: {
+      type: Object,
+      default: () => ({})
+    },
+    otherInfo: {
       type: Object,
       default: () => ({})
     },
@@ -63,14 +68,14 @@ export default defineComponent({
         //编辑操作
         store.dispatch('systemModule/editPageDataAction', {
           pageName: props.pageName,
-          editData: { ...tbaleData.value },
+          editData: { ...tbaleData.value, ...props.otherInfo },
           id: props.defaultInfo.id
         });
       } else {
         //新建操作
         store.dispatch('systemModule/createPageDataAction', {
           pageName: props.pageName,
-          newData: { ...tbaleData.value }
+          newData: { ...tbaleData.value, ...props.otherInfo }
         });
       }
     };

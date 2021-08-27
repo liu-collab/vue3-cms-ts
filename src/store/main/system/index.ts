@@ -129,6 +129,7 @@ const systemModule: Module<ISystemType, IRootState> = {
         }
       })
     },
+    //创建相关的网络请求
     async createPageDataAction({ dispatch }, payload: IPayloadType) {
 
       const { pageName, newData } = payload
@@ -152,6 +153,7 @@ const systemModule: Module<ISystemType, IRootState> = {
         }
       })
     },
+    //编辑相关的网络请求
     async editPageDataAction({ dispatch }, payload: IPayloadType) {
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
