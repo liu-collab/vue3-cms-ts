@@ -7,10 +7,14 @@
         </yq-card>
       </el-col>
       <el-col :span="10">
-        <yq-card title="不同城市商品销量"></yq-card>
+        <yq-card title="不同城市商品销量">
+          <line-echart v-bind="categoryGoodsSale"></line-echart>
+        </yq-card>
       </el-col>
       <el-col :span="7">
-        <yq-card title="分类商品数量(玫瑰图)"></yq-card>
+        <yq-card title="分类商品数量(玫瑰图)">
+          <rose-echart :roseData="categoryGoodsCount"></rose-echart>
+        </yq-card>
       </el-col>
     </el-row>
     <el-row :gutter="10">
@@ -28,12 +32,14 @@
 import { useStore } from '@/store';
 import { defineComponent, computed } from 'vue';
 import YqCard from '@/base-ui/card';
-import { PipeEchart } from '@/components/pipe-echart';
+import { PipeEchart, RoseEchart, LineEchart } from '@/components/pipe-echart';
 export default defineComponent({
   name: 'dashboard',
   components: {
     YqCard,
-    PipeEchart
+    PipeEchart,
+    RoseEchart,
+    LineEchart
   },
   setup() {
     const store = useStore();
@@ -44,8 +50,20 @@ export default defineComponent({
         return { name: item.name, value: item.goodsCount };
       });
     });
+    const categoryGoodsSale = computed(() => {
+      const xLable: string[] = [];
+      const value: any[] = [];
+      const categoryGoodsSale = store.state.dashboardModule.categoryGoodsSale;
+      for (const item of categoryGoodsSale) {
+        xLable.push(item.name);
+        value.push(item.goodsFavor);
+      }
+
+      return { xLable, value };
+    });
     return {
-      categoryGoodsCount
+      categoryGoodsCount,
+      categoryGoodsSale
     };
   }
 });
