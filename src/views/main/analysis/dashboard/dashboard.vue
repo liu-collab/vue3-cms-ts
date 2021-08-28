@@ -8,7 +8,7 @@
       </el-col>
       <el-col :span="10">
         <yq-card title="不同城市商品销量">
-          <line-echart v-bind="categoryGoodsSale"></line-echart>
+          <map-echart :mapData="addressGoodsSale"></map-echart>
         </yq-card>
       </el-col>
       <el-col :span="7">
@@ -19,10 +19,14 @@
     </el-row>
     <el-row :gutter="10">
       <el-col :span="12">
-        <yq-card title="分类商品的销量"></yq-card>
+        <yq-card title="分类商品的销量">
+          <line-echart v-bind="categoryGoodsSale"></line-echart>
+        </yq-card>
       </el-col>
       <el-col :span="12">
-        <yq-card title="分类商品的收藏"> </yq-card>
+        <yq-card title="分类商品的收藏">
+          <bar-echart v-bind="categoryGoodsFavor"></bar-echart>
+        </yq-card>
       </el-col>
     </el-row>
   </div>
@@ -32,14 +36,22 @@
 import { useStore } from '@/store';
 import { defineComponent, computed } from 'vue';
 import YqCard from '@/base-ui/card';
-import { PipeEchart, RoseEchart, LineEchart } from '@/components/pipe-echart';
+import {
+  PipeEchart,
+  RoseEchart,
+  LineEchart,
+  BarEchart,
+  MapEchart
+} from '@/components/pipe-echart';
 export default defineComponent({
   name: 'dashboard',
   components: {
     YqCard,
     PipeEchart,
     RoseEchart,
-    LineEchart
+    LineEchart,
+    BarEchart,
+    MapEchart
   },
   setup() {
     const store = useStore();
@@ -61,9 +73,27 @@ export default defineComponent({
 
       return { xLable, value };
     });
+    const categoryGoodsFavor = computed(() => {
+      const xLable: string[] = [];
+      const value: any[] = [];
+      const categoryGoodsSale = store.state.dashboardModule.categoryGoodsFavor;
+      for (const item of categoryGoodsSale) {
+        xLable.push(item.name);
+        value.push(item.goodsFavor);
+      }
+
+      return { xLable, value };
+    });
+    const addressGoodsSale = computed(() => {
+      return store.state.dashboardModule.addressGoodsSale.map((item: any) => {
+        return { name: item.address, value: item.count };
+      });
+    });
     return {
       categoryGoodsCount,
-      categoryGoodsSale
+      categoryGoodsSale,
+      categoryGoodsFavor,
+      addressGoodsSale
     };
   }
 });

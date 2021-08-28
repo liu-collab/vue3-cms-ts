@@ -1,5 +1,10 @@
 import * as echarts from 'echarts'
 
+import chainaMapData from '../data/china.json'
+
+echarts.registerMap('china', chainaMapData)
+
+
 export default function (el: HTMLElement) {
   const echartInstance = echarts.init(el)
 
