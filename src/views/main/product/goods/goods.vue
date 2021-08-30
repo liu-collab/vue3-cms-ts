@@ -1,6 +1,15 @@
 <template>
   <div class="goods">
-    <page-content :pageContentConfig="pageContentConfig" pageName="goods">
+    <search-form-page
+      :searchConfig="searchFormConfig"
+      @handleResetData="handleResetResult"
+      @handleSearchData="handleSearchResult"
+    ></search-form-page>
+    <page-content
+      :pageContentConfig="pageContentConfig"
+      ref="pageContentRef"
+      pageName="goods"
+    >
       <template #imgUrl="scope">
         <el-image
           style="width: 60px; height: 60px"
@@ -22,16 +31,30 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
+import searchFormPage from '@/components/search-form';
 import pageContent from '@/components/page-content/src/pagecontent.vue';
+
 import { pageContentConfig } from './config/goodsContentConfig';
+import { searchFormConfig } from './config/searchform.config';
+
+import { usePageContent } from '@/hooks/usePageContent';
+
 export default defineComponent({
   name: 'goods',
   components: {
-    pageContent
+    pageContent,
+    searchFormPage
   },
   setup() {
+    const [pageContentRef, handleResetResult, handleSearchResult] =
+      usePageContent();
     return {
-      pageContentConfig
+      pageContentConfig,
+      searchFormConfig,
+      pageContentRef,
+      handleResetResult,
+      handleSearchResult
     };
   }
 });
