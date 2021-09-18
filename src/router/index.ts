@@ -18,7 +18,8 @@ const routes: RouteRecordRaw[] = [
     path: '/main',
     name: 'main',
     component: () => import('@/views/main/Main.vue')
-  }, {
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: '404',
     component: () => import('@/views/404/404.vue')
@@ -31,13 +32,13 @@ const router = createRouter({
 });
 router.beforeEach((to) => {
   if (to.path !== '/login') {
-    const token = LocalCache.getCache('token')
+    const token = LocalCache.getCache('token');
     if (!token) {
-      return '/login'
+      return '/login';
     }
   }
   if (to.path == '/main') {
-    return fistMenu.url
+    return fistMenu.url;
   }
-})
+});
 export default router;

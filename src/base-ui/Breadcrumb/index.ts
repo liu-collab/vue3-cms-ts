@@ -1,3 +1,3 @@
-import BreadCrumb from './src/BreadCrumb.vue'
+import BreadCrumb from './src/BreadCrumb.vue';
 
-export default BreadCrumb
+export default BreadCrumb;

@@ -1,5 +1,5 @@
-import YQFrom from './from/from.vue'
+import YQFrom from './from/from.vue';
 
-export * from './type/type'
+export * from './type/type';
 
-export default YQFrom
+export default YQFrom;

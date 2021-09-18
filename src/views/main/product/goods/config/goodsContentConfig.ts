@@ -22,4 +22,4 @@ export const pageContentConfig = {
   ],
   showIndecCloum: true,
   showSelectcolumn: true
-}
+};

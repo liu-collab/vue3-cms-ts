@@ -1,6 +1,4 @@
-
-
 export interface IBread {
-  name: string
-  path?: any
+  name: string;
+  path?: any;
 }

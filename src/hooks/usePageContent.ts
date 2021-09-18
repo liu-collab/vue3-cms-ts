@@ -1,7 +1,5 @@
-import { ref } from "vue";
-import pageContent from "@/components/page-content";
-
-
+import { ref } from 'vue';
+import pageContent from '@/components/page-content';
 
 export function usePageContent() {
   const pageContentRef = ref<InstanceType<typeof pageContent>>();
@@ -11,5 +9,5 @@ export function usePageContent() {
   const handleSearchResult = (searchInfo: any) => {
     pageContentRef.value?.getPageData(searchInfo);
   };
-  return [pageContentRef, handleResetResult, handleSearchResult]
+  return [pageContentRef, handleResetResult, handleSearchResult];
 }

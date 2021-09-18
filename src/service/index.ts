@@ -1,6 +1,6 @@
 import LocalCache from '@/utlis/Cache';
-import YQRequest from './request'
-import { BASE_URL, TIME_OUT } from './request/config'
+import YQRequest from './request';
+import { BASE_URL, TIME_OUT } from './request/config';
 
 const Request = new YQRequest({
   baseURL: BASE_URL,
@@ -10,30 +10,26 @@ const Request = new YQRequest({
     requestInterceptors: (config) => {
       //携带token拦截
 
-      const token = LocalCache.getCache('token')
+      const token = LocalCache.getCache('token');
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+        config.headers.Authorization = `Bearer ${token}`;
       }
 
       // console.log(config.headers.Authorization)
       //  console.log("请求拦截成功")
-      return config
+      return config;
     },
-    requesrInterceptorsCath: error => {
-      return error
+    requesrInterceptorsCath: (error) => {
+      return error;
     },
-    responseInterceptors: res => {
+    responseInterceptors: (res) => {
       //  console.log("响应拦截成功")
-      return res
+      return res;
     },
-    responseInterceptotrsCath: error => {
-      return error
+    responseInterceptotrsCath: (error) => {
+      return error;
     }
   }
+});
 
-})
-
-export default Request
-
-
-
+export default Request;

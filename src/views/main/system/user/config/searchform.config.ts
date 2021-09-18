@@ -1,4 +1,4 @@
-import { IForm } from "@/base-ui";
+import { IForm } from '@/base-ui';
 export const searchFormConfig: IForm = {
   formItem: [
     {
@@ -60,5 +60,3 @@ export const searchFormConfig: IForm = {
     padding: '10px 30px'
   }
 };
-
-

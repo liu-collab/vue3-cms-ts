@@ -1,7 +1,6 @@
-import { IForm } from "@/base-ui";
+import { IForm } from '@/base-ui';
 export const searchFormConfig: IForm = {
   formItem: [
-
     {
       type: 'input',
       field: 'name',
@@ -25,11 +24,9 @@ export const searchFormConfig: IForm = {
         type: 'daterange'
       }
     }
-
   ],
   labelWidth: '100px',
   itemStyle: {
-    padding: '10px 30px 10px 5px',
-
-  },
-}
+    padding: '10px 30px 10px 5px'
+  }
+};

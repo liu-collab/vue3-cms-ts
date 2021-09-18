@@ -1,3 +1,3 @@
-import YQTable from './table.vue'
+import YQTable from './table.vue';
 
-export default YQTable
+export default YQTable;

@@ -1,6 +1,5 @@
 //const path = require('path');
 module.export = {
-
   //方法一
   // configureWebpack: (config) => {
   //   config.resolve.alias = {
@@ -21,12 +20,12 @@ module.export = {
   //     }
   //   }
   // },
-   devServer: {
+  devServer: {
     proxy: {
       '/api': {
         target: 'http://152.136.185.210:5000',
-        pathRewrite: {  '^/api': '' },
-        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true
       }
     }
   },
@@ -34,9 +33,8 @@ module.export = {
   configureWebpack: {
     resolve: {
       alias: {
-        coponents: '@/component',
-      },
-    },
-
-  },
+        coponents: '@/component'
+      }
+    }
+  }
 };

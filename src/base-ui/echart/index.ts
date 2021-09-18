@@ -1,7 +1,4 @@
-import useEchart from "./hooks/useEchart";
-import BaseEchart from './src/base-echart.vue'
+import useEchart from './hooks/useEchart';
+import BaseEchart from './src/base-echart.vue';
 
-export {
-  useEchart,
-  BaseEchart
-}
+export { useEchart, BaseEchart };

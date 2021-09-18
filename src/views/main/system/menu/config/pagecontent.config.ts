@@ -1,4 +1,3 @@
-
 const pageContentConfig = {
   title: '菜单列表',
 
@@ -31,6 +30,6 @@ const pageContentConfig = {
     }
   },
   showFooter: false
-}
+};
 
-export { pageContentConfig }
+export { pageContentConfig };

@@ -1,11 +1,10 @@
-
 export const returnCode = (code: any) => {
-  const retucode = parseInt(code)
+  const retucode = parseInt(code);
   if (retucode == 400) {
-    return 'error'
+    return 'error';
   } else if (retucode < 0) {
-    return 'warning'
+    return 'warning';
   } else {
-    return 'success'
+    return 'success';
   }
-}
+};

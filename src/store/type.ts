@@ -1,18 +1,16 @@
 import { ISystemType } from './main/system/type';
-import { ILoginType } from "./login/type";
+import { ILoginType } from './login/type';
 import { IDashBoard } from './main/alalysis/type';
 export interface IRootState {
-
-  entireDepartment: any[],
-  entireRole: any[],
-  entireMenu: any[]
-
+  entireDepartment: any[];
+  entireRole: any[];
+  entireMenu: any[];
 }
 
 export interface IRootWithModule {
-  loginModule: ILoginType,
-  systemModule: ISystemType,
-  dashboardModule: IDashBoard
+  loginModule: ILoginType;
+  systemModule: ISystemType;
+  dashboardModule: IDashBoard;
 }
 
-export type IRootType = IRootState & IRootWithModule
+export type IRootType = IRootState & IRootWithModule;

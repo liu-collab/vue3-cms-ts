@@ -1,96 +1,98 @@
-import { IBread } from '@/base-ui/Breadcrumb/type/type'
-import { RouteRecordRaw } from 'vue-router'
+import { IBread } from '@/base-ui/Breadcrumb/type/type';
+import { RouteRecordRaw } from 'vue-router';
 
 //保存第一次进来时的菜单,用于重定向路由
-let fistMenu: any = null
+let fistMenu: any = null;
 export function mapMenuInfo(userInfoMenu: any[]): RouteRecordRaw[] {
-  const routes: RouteRecordRaw[] = []
+  const routes: RouteRecordRaw[] = [];
 
   //1.先加载所有的默认路由
-  const allRoutes: RouteRecordRaw[] = []
+  const allRoutes: RouteRecordRaw[] = [];
   //加载所有导出的路由文件
-  const routerFiles = require.context('../router/main', true, /\.ts/)
-  routerFiles.keys().forEach(key => {
-    const route = require('../router/main' + key.split('.')[1])
-    allRoutes.push(route.default)
-
-  })
+  const routerFiles = require.context('../router/main', true, /\.ts/);
+  routerFiles.keys().forEach((key) => {
+    const route = require('../router/main' + key.split('.')[1]);
+    allRoutes.push(route.default);
+  });
   // console.log(allRoutes)
   //2.根据菜单获取需要添加的路由
   const _recurseGetRoute = (menus: any[]) => {
     for (const menu of menus) {
       if (menu.type === 2) {
-        const route = allRoutes.find(route => route.path === menu.url)
-        if (route) routes.push(route)
+        const route = allRoutes.find((route) => route.path === menu.url);
+        if (route) routes.push(route);
         if (!fistMenu) {
-          fistMenu = menu
+          fistMenu = menu;
         }
       } else {
-        _recurseGetRoute(menu.children)
+        _recurseGetRoute(menu.children);
       }
     }
-  }
-  _recurseGetRoute(userInfoMenu)
+  };
+  _recurseGetRoute(userInfoMenu);
 
-  return routes
+  return routes;
 }
 
 //面包屑路径和名字查找
 export function pathBreadCrumb(userInfoMenu: any[], currentPath: string) {
-  const breadCrumbs: IBread[] = []
-  pathMapToMenu(userInfoMenu, currentPath, breadCrumbs)
-  return breadCrumbs
+  const breadCrumbs: IBread[] = [];
+  pathMapToMenu(userInfoMenu, currentPath, breadCrumbs);
+  return breadCrumbs;
 }
 
-
 //根据路径查找当前点击的aside  ,对面包屑功能进行扩展
-export function pathMapToMenu(userInfoMenu: any[], currentPath: string, breadCrumbs?: IBread[]): any {
+export function pathMapToMenu(
+  userInfoMenu: any[],
+  currentPath: string,
+  breadCrumbs?: IBread[]
+): any {
   for (const menu of userInfoMenu) {
     if (menu.type === 1) {
-      const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
+      const findMenu = pathMapToMenu(menu.children ?? [], currentPath);
       if (findMenu) {
-        breadCrumbs?.push({ name: menu.name })
-        breadCrumbs?.push({ name: findMenu.name })
-        return findMenu
+        breadCrumbs?.push({ name: menu.name });
+        breadCrumbs?.push({ name: findMenu.name });
+        return findMenu;
       }
     } else if (menu.type === 2 && menu.url === currentPath) {
-      return menu
+      return menu;
     }
   }
 }
 
 //查找权限
 export function mapMenuInfoToPermisssion(userMenuInfo: any) {
-  const permission: string[] = []
+  const permission: string[] = [];
 
   function _recurseGeTPermission(menus: any[]) {
     for (const menu of menus) {
       if (menu.type === 1 || menu.type === 2) {
-        _recurseGeTPermission(menu.children ?? [])
+        _recurseGeTPermission(menu.children ?? []);
       } else if (menu.type === 3) {
-        permission.push(menu.permission)
+        permission.push(menu.permission);
       }
     }
   }
-  _recurseGeTPermission(userMenuInfo)
-  return permission
+  _recurseGeTPermission(userMenuInfo);
+  return permission;
 }
 
 //对权限的叶子节点进行查找;
 export function mapMenuLeaf(menuList: any) {
-  const leafKeys: number[] = []
+  const leafKeys: number[] = [];
 
   function _recurseGetLeaf(memuList: any) {
     for (const menus of memuList) {
       if (menus.children) {
-        _recurseGetLeaf(menus.children)
+        _recurseGetLeaf(menus.children);
       } else {
-        leafKeys.push(menus.id)
+        leafKeys.push(menus.id);
       }
     }
   }
-  _recurseGetLeaf(menuList)
-  return leafKeys
+  _recurseGetLeaf(menuList);
+  return leafKeys;
 }
 
-export { fistMenu }
+export { fistMenu };

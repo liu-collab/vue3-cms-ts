@@ -6,7 +6,6 @@ export const rules = {
       trigger: 'blur'
     },
     {
-
       pattern: /^[a-z0-9]{3,10}$/,
       message: '账号长度为三到十位字母或数字',
       trigger: 'blur'
@@ -19,7 +18,6 @@ export const rules = {
       trigger: 'blur'
     },
     {
-
       pattern: /^[a-z0-9]{5,10}$/,
       message: '密码长度为五到十位字母或数字',
       trigger: 'blur'

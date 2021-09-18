@@ -1,21 +1,13 @@
 <template>
   <div class="goods">
-    <search-form-page
-      :searchConfig="searchFormConfig"
-      @handleResetData="handleResetResult"
-      @handleSearchData="handleSearchResult"
-    ></search-form-page>
-    <page-content
-      :pageContentConfig="pageContentConfig"
-      ref="pageContentRef"
-      pageName="goods"
-    >
+    <search-form-page :searchConfig="searchFormConfig"
+                      @handleResetData="handleResetResult"
+                      @handleSearchData="handleSearchResult"></search-form-page>
+    <page-content :pageContentConfig="pageContentConfig" ref="pageContentRef"
+                  pageName="goods">
       <template #imgUrl="scope">
-        <el-image
-          style="width: 60px; height: 60px"
-          :src="scope.row.imgUrl"
-          :preview-src-list="[scope.row.imgUrl]"
-        >
+        <el-image style="width: 60px; height: 60px" :src="scope.row.imgUrl"
+                  :preview-src-list="[scope.row.imgUrl]">
         </el-image>
       </template>
       <template #oldPrice="scope">{{ '￥' + scope.row.oldPrice }}</template>

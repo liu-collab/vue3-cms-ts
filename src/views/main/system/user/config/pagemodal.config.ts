@@ -1,4 +1,4 @@
-import { IForm } from "@/base-ui"
+import { IForm } from '@/base-ui';
 const pageModalConfig: IForm = {
   formItem: [
     {
@@ -40,14 +40,13 @@ const pageModalConfig: IForm = {
       label: '角色',
       placeholder: '请选择角色',
       options: []
-    },
+    }
   ],
   labelWidth: '80px',
   itemStyle: {
     padding: '-5px 20px'
   },
   collLayout: { span: 24 }
+};
 
-}
-
-export { pageModalConfig }
+export { pageModalConfig };

@@ -1,3 +1,3 @@
-import YqCard from './yqCard.vue'
+import YqCard from './yqCard.vue';
 
-export default YqCard
+export default YqCard;

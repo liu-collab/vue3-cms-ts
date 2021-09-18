@@ -1,5 +1,4 @@
-
 export interface IReustType<T = any> {
-  code: number
-  data: T
+  code: number;
+  data: T;
 }

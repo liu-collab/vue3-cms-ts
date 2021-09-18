@@ -1,4 +1,3 @@
-
 const pageContentConfig = {
   tableData: [
     { prop: 'name', label: '部门名称', minWidth: '100', slotName: 'name' },
@@ -30,7 +29,7 @@ const pageContentConfig = {
     { label: '操作', minWidth: '120', slotName: 'handle' }
   ],
   showIndecCloum: true,
-  title: '部门列表',
-}
+  title: '部门列表'
+};
 
-export { pageContentConfig }
+export { pageContentConfig };

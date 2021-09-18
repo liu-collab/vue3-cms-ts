@@ -1,3 +1,3 @@
-import searchFormPage from './src/search-form.vue'
+import searchFormPage from './src/search-form.vue';
 
-export default searchFormPage
+export default searchFormPage;

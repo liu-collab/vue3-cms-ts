@@ -1,13 +1,12 @@
-import { App } from "vue";
-import formUtcTime from "@/utlis/formatUtcTime";
-import { ElMessage } from "element-plus";
+import { App } from 'vue';
+import formUtcTime from '@/utlis/formatUtcTime';
+import { ElMessage } from 'element-plus';
 export default function registerProp(app: App) {
   //注册全局属性
   app.config.globalProperties.$filters = {
     //时间格式化
     formatTime(value: string) {
-      return formUtcTime(value)
+      return formUtcTime(value);
     }
-  }
-
+  };
 }

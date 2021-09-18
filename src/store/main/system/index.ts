@@ -1,10 +1,15 @@
 import { ElMessage } from 'element-plus';
-import { Module } from "vuex";
+import { Module } from 'vuex';
 
 import { IRootState } from './../../type';
-import { ISystemType, IPayloadType } from "./type";
-import { getPageListData, delelePageData, createPageData, editPageData } from "@/service/main/system";
-import { returnCode } from '@/utlis/returnCode'
+import { ISystemType, IPayloadType } from './type';
+import {
+  getPageListData,
+  delelePageData,
+  createPageData,
+  editPageData
+} from '@/service/main/system';
+import { returnCode } from '@/utlis/returnCode';
 const systemModule: Module<ISystemType, IRootState> = {
   namespaced: true,
 
@@ -22,69 +27,69 @@ const systemModule: Module<ISystemType, IRootState> = {
       departmentCount: 0,
       categoryList: [],
       categoryCount: 0
-    }
+    };
   },
   mutations: {
     changeusersList(state, list: any[]) {
-      state.usersList = list
+      state.usersList = list;
     },
     changeusersCount(state, count: number) {
-      state.usersCount = count
+      state.usersCount = count;
     },
     changeroleList(state, list: any[]) {
-      state.roleList = list
+      state.roleList = list;
     },
     changeroleCount(state, count: number) {
-      state.roleCount = count
+      state.roleCount = count;
     },
     changegoodsList(state, list: any[]) {
-      state.goodsList = list
+      state.goodsList = list;
     },
     changegoodsCount(state, count: number) {
-      state.goodsCount = count
+      state.goodsCount = count;
     },
     changemenuList(state, list: any[]) {
-      state.menuList = list
+      state.menuList = list;
     },
     changemenuCount(state, count: number) {
-      state.menuCount = count
+      state.menuCount = count;
     },
     changedepartmentList(state, list: any[]) {
-      state.departmentList = list
+      state.departmentList = list;
     },
     changedepartmentCount(state, count: number) {
-      state.departmentCount = count
+      state.departmentCount = count;
     },
     changecategoryList(state, list: any[]) {
-      state.categoryList = list
+      state.categoryList = list;
     },
     changecategoryCount(state, count: number) {
-      state.categoryCount = count
+      state.categoryCount = count;
     }
   },
   getters: {
     pageListData(state) {
       return (pageName: string) => {
-        return (state as any)[`${pageName}List`]
+        return (state as any)[`${pageName}List`];
         // switch (pageName) {
         //   case 'users':
         //     return state.usersList
         //   case 'role':
         //     return state.roleList
         // }
-      }
+      };
     },
     pageListCount(state) {
       return (pageName: string) => {
-        return (state as any)[`${pageName}Count`]
-      }
+        return (state as any)[`${pageName}Count`];
+      };
     }
   },
   actions: {
     //请求数据列表网络请求
     async getPageListAction({ commit }, payload: IPayloadType) {
-      const pageName = payload.pageName
-      const pageUrl = `/${pageName}/list`
+      const pageName = payload.pageName;
+      const pageUrl = `/${pageName}/list`;
       //通过接收到的pageName,调用对应的接口
       // switch (pageName) {
       //   case 'user':
@@ -97,29 +102,28 @@ const systemModule: Module<ISystemType, IRootState> = {
       // console.log(payload.url)
       // console.log(payload.queryInfo)
       //获取网页数据
-      const pageListResult = await getPageListData(pageUrl, payload.queryInfo)
+      const pageListResult = await getPageListData(pageUrl, payload.queryInfo);
 
       // console.log(pageListResult)
-      const { list, totalCount } = pageListResult.data
+      const { list, totalCount } = pageListResult.data;
       //用字符串拼接来处理提交不同的mutations
-      commit(`change${pageName}List`, list)
-      commit(`change${pageName}Count`, totalCount)
+      commit(`change${pageName}List`, list);
+      commit(`change${pageName}Count`, totalCount);
     },
     //删除网络请求
     async deletePageDataAction({ dispatch }, payload: IPayloadType) {
-      const { pageName, id } = payload
+      const { pageName, id } = payload;
       //拼接地址
-      const pageUrl = `/${pageName}/${id}`
+      const pageUrl = `/${pageName}/${id}`;
       //删除请求
-      const { code, data } = await delelePageData(pageUrl)
-      console.log(data, code)
+      const { code, data } = await delelePageData(pageUrl);
+
       //消息提示
       ElMessage({
         showClose: true,
         message: data,
         type: returnCode(code)
-
-      })
+      });
       //重新请求数据
       dispatch('getPageListAction', {
         pageName,
@@ -127,23 +131,21 @@ const systemModule: Module<ISystemType, IRootState> = {
           offset: 0,
           size: 10
         }
-      })
+      });
     },
     //创建相关的网络请求
     async createPageDataAction({ dispatch }, payload: IPayloadType) {
+      const { pageName, newData } = payload;
+      const pageUrl = `/${pageName}`;
 
-      const { pageName, newData } = payload
-      const pageUrl = `/${pageName}`
-
-      const { code, data } = await createPageData(pageUrl, newData)
+      const { code, data } = await createPageData(pageUrl, newData);
 
       //消息提示
       ElMessage({
         showClose: true,
         message: data,
         type: returnCode(code)
-
-      })
+      });
       //重新请求数据
       dispatch('getPageListAction', {
         pageName,
@@ -151,21 +153,20 @@ const systemModule: Module<ISystemType, IRootState> = {
           offset: 0,
           size: 10
         }
-      })
+      });
     },
     //编辑相关的网络请求
     async editPageDataAction({ dispatch }, payload: IPayloadType) {
-      const { pageName, editData, id } = payload
-      const pageUrl = `/${pageName}/${id}`
-      const { code, data } = await editPageData(pageUrl, editData)
+      const { pageName, editData, id } = payload;
+      const pageUrl = `/${pageName}/${id}`;
+      const { code, data } = await editPageData(pageUrl, editData);
 
       //消息提示
       ElMessage({
         showClose: true,
         message: data,
         type: returnCode(code)
-
-      })
+      });
       //重新请求数据
       dispatch('getPageListAction', {
         pageName,
@@ -173,9 +174,9 @@ const systemModule: Module<ISystemType, IRootState> = {
           offset: 0,
           size: 10
         }
-      })
+      });
     }
   }
-}
+};
 
-export default systemModule
+export default systemModule;
