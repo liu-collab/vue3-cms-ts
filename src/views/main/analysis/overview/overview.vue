@@ -11,6 +11,14 @@
       <yq-descript :tableDatas = ProtableDatas :column="2" title="生产环境依赖"></yq-descript>
       <yq-descript :tableDatas= DevtableDatas  title="开发环境依赖"> </yq-descript>
     </yq-card>
+    <yq-card title="Git提交规范">
+      <yq-descript :column="1"    :tableDatas="[ { name: 'add 操作', description: 'git add ' },
+          { name: 'commit 操作', description: 'yarn commit ' },
+          { name: 'pull 操作', description: 'git pull ' },
+          { name: 'push 操作', description: 'git push ' }]">
+
+      </yq-descript>
+    </yq-card>
   </div>
 </template>
 

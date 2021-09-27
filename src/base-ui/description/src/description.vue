@@ -42,7 +42,7 @@ type Size = 'medium' | 'small' | 'mini'
 withDefaults( defineProps<IDescriptionProp>() ,{
     tableDatas:()=>[],
     column:3,
-    title:'With border',
+    title:'',
     size:"medium"
   })
 
