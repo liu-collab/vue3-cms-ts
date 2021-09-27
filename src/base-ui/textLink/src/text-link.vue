@@ -22,7 +22,7 @@ interface IItem {
   TextAttrs: IItem[];
 }
 
-  const props  =withDefaults( defineProps<ITextLink>() ,{
+ withDefaults( defineProps<ITextLink>() ,{
     TextAttrs:()=>[]
   })
 </script>

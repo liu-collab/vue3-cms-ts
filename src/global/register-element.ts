@@ -36,7 +36,10 @@ import {
   ElMessage,
   ElDialog,
   ElTree,
-  ElCard
+  ElCard,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElTag
 } from 'element-plus';
 
 const components = [
@@ -74,7 +77,10 @@ const components = [
   ElImage,
   ElDialog,
   ElTree,
-  ElCard
+  ElCard,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElTag
 ];
 const plugins = [ElMessage];
 

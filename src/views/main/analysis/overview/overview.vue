@@ -8,6 +8,8 @@
     </yq-card>
     <yq-card title="技术栈">
       <text-link :TextAttrs = technologyStack></text-link>
+      <yq-descript :tableDatas = ProtableDatas :column="2" title="生产环境依赖"></yq-descript>
+      <yq-descript :tableDatas= DevtableDatas  title="开发环境依赖"> </yq-descript>
     </yq-card>
   </div>
 </template>
@@ -16,19 +18,25 @@
 import { defineComponent } from 'vue';
 import  YqCard from '@/base-ui/card';
 import TextLink from '@/base-ui/textLink'
+import YqDescript from '@/base-ui/description'
 
 import { technologyStack} from './config/technoStack.config'
+import {  ProtableDatas } from './config/desc-table.config'
+import { DevtableDatas } from './config/dev-table.config'
 export default defineComponent({
   name: 'overview',
   components:{
    YqCard,
-   TextLink
+   TextLink,
+   YqDescript
   },
   setup() {
   //  const technologyStack = [{ title: '自动部署',
   //     desc: 'Centos + Jenkins + Nginx'}]
     return {
-      technologyStack
+      technologyStack,
+      ProtableDatas,
+      DevtableDatas
     };
   }
 });
