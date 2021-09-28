@@ -15,7 +15,7 @@ export function getCategoryGoodsCount() {
 }
 export function getCategoryGoodsSale() {
   return Request.get<IReustType>({
-    url: DashboardAPI.addressGoodsSale
+    url: DashboardAPI.categoryGoodsSale
   });
 }
 export function getCategoryGoodsFavor() {

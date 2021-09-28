@@ -46,7 +46,7 @@ export const technologyStack = [
 
   {
     title: 'CSS 预编译',
-    desc: 'Sass / Less'
+    desc: ' Less'
   },
 
   {

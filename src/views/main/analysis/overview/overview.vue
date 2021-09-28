@@ -11,7 +11,7 @@
       <yq-descript :tableDatas = ProtableDatas :column="2" title="生产环境依赖"></yq-descript>
       <yq-descript :tableDatas= DevtableDatas  title="开发环境依赖"> </yq-descript>
     </yq-card>
-    <yq-card title="Git提交规范">
+    <yq-card class="git-card"  title="Git提交规范">
       <yq-descript :column="1"    :tableDatas="[ { name: 'add 操作', description: 'git add ' },
           { name: 'commit 操作', description: 'yarn commit ' },
           { name: 'pull 操作', description: 'git pull ' },
@@ -39,8 +39,7 @@ export default defineComponent({
    YqDescript
   },
   setup() {
-  //  const technologyStack = [{ title: '自动部署',
-  //     desc: 'Centos + Jenkins + Nginx'}]
+
     return {
       technologyStack,
       ProtableDatas,
@@ -53,6 +52,9 @@ export default defineComponent({
 <style scoped lang="less">
 .fist-title{
   margin-bottom: 20px;
+}
+.git-card {
+  margin-top: 20px;
 }
 
 </style>

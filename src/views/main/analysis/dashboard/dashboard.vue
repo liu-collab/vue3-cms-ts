@@ -68,7 +68,7 @@ export default defineComponent({
       const categoryGoodsSale = store.state.dashboardModule.categoryGoodsSale;
       for (const item of categoryGoodsSale) {
         xLable.push(item.name);
-        value.push(item.goodsFavor);
+        value.push(item.goodsCount);
       }
 
       return { xLable, value };
