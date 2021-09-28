@@ -29,7 +29,7 @@ const options: EChartsOption = computed(() => {
       text: '全国销量统计',
       left: 'center',
       textStyle: {
-        color: '#fff'
+        color: 'red'
       }
     },
     tooltip: {

@@ -23,8 +23,8 @@
 <script setup lang="ts">
 
 
-import {withDefaults , defineProps} from 'vue'
-//import { IDescriptionProp } from '../type'
+import {withDefaults, defineProps} from 'vue'
+//import  IDescriptionProp  from '../type'
 type Size = 'medium' | 'small' | 'mini'
  interface DescriptionProp {
   name: string;

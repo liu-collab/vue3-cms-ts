@@ -1,7 +1,7 @@
-export interface DescriptionProp {
+interface DescriptionProp {
   name: string;
   description: string;
 }
-export interface IDescriptionProp {
+export default interface IDescriptionProp {
   tableDatas: DescriptionProp[];
 }
