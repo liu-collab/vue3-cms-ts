@@ -11,8 +11,8 @@ const pageModalConfig: IForm = {
     {
       type: 'input',
       field: 'intro',
-      label: '部门',
-      placeholder: '请输入部门'
+      label: '权限介绍',
+      placeholder: '请输入权限介绍'
     }
   ],
   labelWidth: '80px',
