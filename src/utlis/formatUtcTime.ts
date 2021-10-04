@@ -1,4 +1,4 @@
-const FROMT_TIME_DEFAULT = 'YYYY-MM-DD:HH:mm:sss';
+const FROMT_TIME_DEFAULT = 'YYYY-MM-DD:HH:mm:ss';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
