@@ -34,10 +34,10 @@ export const technologyStack = [
     desc: 'Echart5.x'
   },
 
-  {
-    title: '富文本',
-    desc: 'WangEditor'
-  },
+  // {
+  //   title: '富文本',
+  //   desc: 'WangEditor'
+  // },
 
   {
     title: '工具库',
