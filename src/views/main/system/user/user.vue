@@ -11,7 +11,13 @@
       ref="pageContentRef"
       @handleEditClick="handleEditData"
       @handleNewClick="handleNewData"
-    ></page-content>
+    >
+     <template #enable="scope">
+        <el-button size="mini" :type="scope.row.enable ? 'danger' : 'success'" @click="handleEnble(scope)">
+          {{ scope.row.enable ? '禁用' : '启用' }}
+        </el-button>
+      </template>
+    </page-content>
 
     <page-modal
       :defaultInfo="defaultInfo"
@@ -84,6 +90,10 @@ export default defineComponent({
       });
       return pageModalConfig;
     });
+
+    const handleEnble = (scope:any)=>{
+      scope.row.enable = !scope.row.enable
+    }
     return {
       searchFormConfig,
       pageContentConfig,
@@ -94,7 +104,8 @@ export default defineComponent({
       handleEditData,
       handleNewData,
       pageModalRef,
-      defaultInfo
+      defaultInfo,
+      handleEnble
     };
   }
 });
