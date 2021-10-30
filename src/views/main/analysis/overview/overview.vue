@@ -12,7 +12,7 @@
       <yq-descript :tableDatas= DevtableDatas  title="开发环境依赖"> </yq-descript>
     </yq-card>
     <yq-card class="git-card"  title="Git提交规范">
-      <yq-descript :column="1"    :tableDatas="[ { name: 'add 操作', description: 'git add ' },
+      <yq-descript :column="1"    :tableDatas="[ { name: 'add 操作', description: 'git add .' },
           { name: 'commit 操作', description: 'npm run  commit ' },
           { name: 'pull 操作', description: 'git pull ' },
           { name: 'push 操作', description: 'git push ' }]">
